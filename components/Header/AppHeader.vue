@@ -21,4 +21,97 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 </script>
 
-<style scoped src="./AppHeader.css"></style>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+.header {
+    box-shadow:
+        5px 5px 10px #d9d9d9,
+        -5px -5px 10px #ffffff;
+    width: 100%;
+    height: 7rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 8rem;
+    height: 5rem;
+}
+
+.header-spacer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.app-title{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3A004F;
+}
+
+.app-title-span {
+    color: #F29544;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-right: 1rem;
+}
+
+.nav-link:hover {
+    color: #570a72;
+}
+
+.login-button{
+    font-weight: 500;
+    width: 8rem;
+    height: 3rem;
+    border-radius: 1rem;
+    background: linear-gradient(90deg, #3a004fd0 0%, #952E3B 40%, #f25d27 100%);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    border: none;
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.341);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.login-button:hover {
+    animation: gradientMove 2s linear infinite;
+    transform: translateY(-1px);
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}</style>
