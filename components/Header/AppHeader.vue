@@ -2,7 +2,7 @@
 <header class="header">
     <div class="header-content">
     <div class="header-spacer">
-    <img src="/Image/EpiCloudLogo.png" alt="Logo do EpiCloud" class="logo" />
+    <img src="/Image/epicloud.png" alt="Logo do EpiCloud" class="logo" />
     <p class="app-title">EPI<span class="app-title-span">Cloud</span></p>
     </div>
     <nav class="nav">
@@ -33,7 +33,7 @@ const router = useRouter()
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #ffffff;
+    background-color: #000000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,7 @@ const router = useRouter()
 
 .logo {
     width: 8rem;
-    height: 5rem;
+    height: 8rem;
 }
 
 .header-spacer {
@@ -52,12 +52,13 @@ const router = useRouter()
 
 .app-title{
     font-size: 1.5rem;
-    font-weight: 700;
-    color: #3A004F;
+    color: #E1D3E3;
+    font-weight: bolder;
 }
 
 .app-title-span {
-    color: #F29544;
+    color: #ffffff;
+    font-weight: 500;
 }
 
 .header-content {
@@ -74,7 +75,7 @@ const router = useRouter()
 
 .nav-link {
     text-decoration: none;
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 1rem;
     font-weight: 500;
     margin-right: 1rem;
@@ -89,11 +90,11 @@ const router = useRouter()
     width: 8rem;
     height: 3rem;
     border-radius: 1rem;
-    background: linear-gradient(90deg, #3a004fd0 0%, #952E3B 40%, #f25d27 100%);
+    background: linear-gradient(90deg, #E1D3E3 0%, #E1D3E3 40%, #7C747D 100%);
     background-size: 200% 200%;
     background-position: 0% 50%;
     border: none;
-    color: white;
+    color: black;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.341);
     cursor: pointer;
     transition: transform 0.2s ease;
