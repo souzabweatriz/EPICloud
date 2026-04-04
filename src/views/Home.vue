@@ -3,10 +3,17 @@
         <AppHeader />
     </div>
     <div class="home-container">
+        <div class="banner-wrap">
+            <img class="banner" src="../../public/Image/bannerWebsite.png" alt="Banner do Website">
+            <div class="banner-text">
+                <p class="banner-eyebrow">A inteligência que o seu estoque de EPIs precisava.</p>
+                <h2>Gestão em nuvem, segurança em tempo real</h2>
+                <button class="sobre-button" @click="router.push('/sobre')">Clique e conheça</button>
+            </div>
+        </div>
         <nav class="home-nav">
             <h1 class="home-title">Proteção em cada detalhe, controle em cada entrega.</h1>
             <p class="text">Agende uma demonstração e veja como a EPICloud pode revolucionar a segurança na sua empresa</p>
-            <button class="sobre-button" @click="router.push('/sobre')">Clique e conheça</button>
         </nav>
         <div class="colored-text">
             <p class="text-purple">Segurança elevada à nuvem</p>
@@ -41,32 +48,7 @@
             <h1 class="section-title">Pronto para transformar sua gestão de EPIs?</h1>
             <p class="section-subtitle">Aproveite de todas as funcionalidades que irão facilitar o seu dia</p>
         </div>
-        <div class="section-gerenciamento">
-            <h1 class="text-gerenciamento">Gerencie as EPI's do seu ambiente corporativo</h1>
-            <aside class="aside-estoque">
-                <div class="aside-bloco">
-                    <h1 class="aside-epi">Botas</h1>
-                    <p>2 unidades</p>
-                    <p class="aside-quantidade">Estoque Crítico</p>
-                </div>
-                <div class="aside-bloco">
-                    <h1 class="aside-epi">Luvas</h1>
-                    <p>20 unidades</p>
-                    <p class="aside-quantidadeemdia">Estoque em dia</p>
-                </div>
-                <div class="aside-bloco">
-                    <h1 class="aside-epi">Fone</h1>
-                    <p>20 unidades</p>
-                    <p class="aside-quantidadeemdia"><span>Estoque em dia</span></p>
-                </div>
-                <div class="aside-bloco">
-                    <h1 class="aside-epi">Óculos</h1>
-                    <p>7 unidades</p>
-                    <p class="aside-quantidade">Estoque Crítico</p>
-                </div>
-            </aside>
-        </div>
-        <div>
+        <div class="section-tracking">
             <h1 class="section-title">Rastreamento do seu estoque de EPIs</h1>
         </div>
     </div>
@@ -77,8 +59,8 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import AppHeader from '/components/Header/AppHeader.vue'
-import AppFooter from '../../components/Footer/AppFooter.vue'
+import AppHeader from '/components/AppHeader.vue'
+import AppFooter from '../../components/AppFooter.vue'
 
 const router = useRouter()
 const showcaseRef = ref(null)
@@ -152,29 +134,81 @@ onBeforeUnmount(() => {
     background-color: #ffffff;
 }
 
+.banner-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.banner-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 34, 44, 0.716);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.banner{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.banner-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+    color: #f4f7f6;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+}
+
+.banner-eyebrow {
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    color: #9dd7d3;
+}
+
+.banner-text h2 {
+    font-size: clamp(1.35rem, 2.6vw, 2.4rem);
+    line-height: 1.1;
+    max-width: 22ch;
+}
+
 .home-nav {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 0.6rem;
     height: 23rem;
     width: 100%;
-    background: radial-gradient(
-    circle at center,
-    #f0eef1 0%,
-    #D4C1DB 50%,
-    #3a004f99 100%
-);
+    background: linear-gradient(180deg, #f3edf7 0%, #ece3f3 100%);
 
 }
 .home-title{
-    max-width: 42rem;
-    font-size: 2.7rem;
+    max-width: 44rem;
+    width: 100%;
+    font-size: 3rem;
     color: #3A004F;
     font-weight: bolder;
+    text-align: center;
+    line-height: 1.08;
 }
 .text{
-    max-width: 34rem;
+    max-width: 35rem;
+    width: 100%;
     font-size: 1.15rem;
     color: #2a0837bb;
     font-weight: 500;
@@ -185,10 +219,10 @@ onBeforeUnmount(() => {
 }
 .sobre-button{
     margin-top: 1.4rem;
-    width: 10.2rem;
-    height: 3.3rem;
+    width: 10rem;
+    height: 3rem;
     border-radius: 0.85rem;
-    background: linear-gradient(90deg, #3c0643 0%, 40%, #b8a0c3 100%);
+    background: linear-gradient(90deg, #061343 0%, 40%, #b8a0c3 100%);
     background-size: 200% 200%;
     background-position: 0% 50%;
     border: none;
@@ -228,7 +262,7 @@ onBeforeUnmount(() => {
     background-color: #ffffffb0;
     border-radius: 1.2rem;
     padding: 0.7rem 0.9rem;
-    border:  1px solid #3A004F;
+    border:  1px solid #c4b7c9;
     color: #3A004F;
     display: flex;
     justify-content: center;
@@ -386,6 +420,8 @@ onBeforeUnmount(() => {
 .title-epis{
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     color: #3A004F;
     font-size: 1.95rem;
 }
@@ -436,100 +472,11 @@ onBeforeUnmount(() => {
         width: 5.6rem;
     }
 }
-.section-gerenciamento{
-    margin-bottom: 3rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: min(100%, 1020px);
-    min-height: 20rem;
-    margin-top: 1.8rem;
-    padding: 1.8rem 1.7rem;
-    border-radius: 1.4rem;
-    background:
-        radial-gradient(circle at 85% 20%, rgba(144, 112, 160, 0.2), transparent 45%),
-        linear-gradient(130deg, #f7f3fa 0%, #efe6f4 52%, #eadff1 100%);
-    box-shadow: 0 16px 40px rgba(58, 0, 79, 0.14);
-}
-.text-gerenciamento{
-    color:#4A1D5C;
-    max-width: 21rem;
-    font-size: 1.8rem;
-    line-height: 1.12;
-    letter-spacing: -0.01em;
-}
-
-.aside-estoque {
-    width: min(100%, 35rem);
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-}
-.aside-bloco{
-    display: flex;
-    text-align: left;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.7rem;
-    width: 100%;
-    min-height: 3.3rem;
-    padding: 0.7rem 0.9rem;
-    background-color: rgba(255, 255, 255, 0.92);
-    border: 1px solid rgba(90, 40, 108, 0.15);
-    border-radius: 1.1rem;
-    box-shadow:
-        0 10px 18px rgba(69, 43, 84, 0.12);
-    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
-}
-
-.aside-bloco:hover {
-    transform: translateY(-4px);
-    border-color: rgba(90, 40, 108, 0.35);
-    box-shadow:
-        0 16px 26px rgba(69, 43, 84, 0.2);
-}
-
-.aside-bloco p {
-    margin: 0;
-    color: #4c3a5a;
-    font-weight: 500;
-    font-size: 0.92rem;
-}
-.aside-quantidade{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-    min-width: 8.1rem;
-    height: 1.7rem;
-    background-color: #f8d8cf;
-    color: #730A0A;
-    border-radius: 999px;
-    border: 1px solid rgba(191, 25, 10, 0.2);
-    transition: background-color 0.25s ease, transform 0.25s ease;
-}
-.aside-quantidadeemdia{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-    min-width: 8.1rem;
-    height: 1.7rem;
-    background-color: #d8eadb;
-    color: #10403B;
-    border-radius: 999px;
-    border: 1px solid rgba(16, 64, 59, 0.16);
-    transition: background-color 0.25s ease, transform 0.25s ease;
-}
-.aside-epi{
-    margin: 0;
-    font-size: 0.9rem;
-    min-width: 4.6rem;
-    color: #2f183d;
+.section-tracking {
+    margin-top: 1.4rem;
+    margin-bottom: 2.2rem;
+    padding: 0 1rem;
+    text-align: center;
 }
 
 .section-subtitle{
@@ -577,28 +524,7 @@ onBeforeUnmount(() => {
     }
 }
 
-.aside-bloco:hover .aside-quantidade,
-.aside-bloco:hover .aside-quantidadeemdia {
-    transform: scale(1.03);
-}
-
 @media (max-width: 1024px) {
-    .section-gerenciamento {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.1rem;
-        padding: 1.3rem 1.1rem;
-        border-radius: 1.1rem;
-    }
-
-    .text-gerenciamento {
-        max-width: 100%;
-        font-size: 1.45rem;
-    }
-
-    .aside-estoque {
-        width: 100%;
-    }
 }
 
 @media (max-width: 640px) {
@@ -631,15 +557,9 @@ onBeforeUnmount(() => {
         padding: 0 0.7rem;
     }
 
-    .section-gerenciamento {
-        width: calc(100% - 1.2rem);
-        margin-top: 1.2rem;
-    }
-
-    .aside-bloco {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        row-gap: 0.5rem;
+    .section-tracking {
+        margin-top: 1rem;
+        margin-bottom: 1.8rem;
     }
 }
 </style>
