@@ -12,7 +12,7 @@
         <router-link class="nav-link" to="/epis">EPIs</router-link>
         <router-link class="nav-link" to="/sobre">Sobre</router-link>
     </nav>
-    <button class="login-button" @click="router.push('/login')">Entrar</button>
+    <button class="login-button" @click="router.push('/Login')">Entrar</button>
 </header>
 </template>
 
@@ -36,10 +36,10 @@ const router = useRouter()
     align-items: center;
     gap: 1rem;
     padding: 0.72rem 1.05rem;
-    width: min(86%, 960px);
-    min-height: 4rem;
+    width: min(85%, 900px);
+    height: 3.5rem;
     position: fixed;
-    top: 0.85rem;
+    top: 1rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1100;
@@ -51,8 +51,8 @@ const router = useRouter()
 }
 
 .image-logo{
-    width: 4.5rem;
-    height: 3rem;
+    width: 4rem;
+    height: 2.5rem;
 }
 
 .logo{
@@ -64,7 +64,6 @@ const router = useRouter()
 .header-spacer {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
 }
 
 .app-title {
@@ -97,19 +96,20 @@ const router = useRouter()
 
 .login-button {
     border: none;
-    border-radius: 999px;
-    padding: 0.5rem 0.92rem;
-    background: linear-gradient(90deg, var(--azul-profundo-seguranca) 0%, #226f7b 100%);
+    border-radius: 0.65rem;
+    width: 5rem;
+    height: 2rem;
+    background: var(--azul-profundo-seguranca);
     color: var(--fundo-minimalista);
     font-weight: 700;
     font-size: 0.84rem;
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease;
+    transition: background 0.2s ease, opacity 0.2s ease;
 }
 
 .login-button:hover {
-    transform: translateY(-1px);
-    background: linear-gradient(90deg, #226f7b 0%, var(--ciano-suave) 100%);
+    background: var(--azul-profundo-seguranca);
+    opacity: 0.92;
 }
 
 @media (max-width: 760px) {

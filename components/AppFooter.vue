@@ -1,33 +1,15 @@
 <template>
     <footer class="app-footer">
-        <div class="footer-shell">
             <div class="footer-top">
                 <section class="brand-column">
                     <div class="brand-row">
-                        <img src="/Image/epicloud.png" alt="Logo do EPICloud" class="brand-icon" />
+                        <img src="/Image/logo.png" alt="Logo do EPICloud" class="brand-icon" />
                         <p class="brand-title">EPICloud</p>
                     </div>
-
                     <p class="brand-copy">
                         Infraestrutura de alto nivel para aplicacoes criticas.
                         Onde a performance encontra a confiabilidade.
                     </p>
-
-                    <form class="email-form" @submit.prevent="sendEmail">
-                        <label for="footer-email" class="sr-only">Digite seu e-mail</label>
-                        <div class="email-input-wrapper">
-                            <span class="email-icon" aria-hidden="true">✉</span>
-                            <input
-                                id="footer-email"
-                                v-model="email"
-                                type="email"
-                                class="email-input"
-                                placeholder="mail@epicloud.com.br"
-                                required
-                            />
-                        </div>
-                        <button type="submit" class="sr-only">Enviar</button>
-                    </form>
                 </section>
 
                 <section class="links-column">
@@ -49,50 +31,58 @@
                         <a href="mailto:contato@epicloud.com.br" class="footer-link">contato@epicloud.com.br</a>
                     </div>
                 </section>
+                <div class="footer-bottom">
+                    <p>EPICloud © 2026. O futuro e agora.</p>
+                    <p>Construido com precisao. Escalado com proposito.</p>
+                </div>
             </div>
-
-            <div class="footer-bottom">
-                <p>EPICloud © 2026. O futuro e agora.</p>
-                <p>Construido com precisao. Escalado com proposito.</p>
-            </div>
-        </div>
     </footer>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const email = ref('')
-
-const sendEmail = () => {
-    const targetEmail = 'contato@epicloud.com.br'
-    const subject = encodeURIComponent('Contato via site EPICloud')
-    const body = encodeURIComponent(`Meu e-mail para retorno: ${email.value}`)
-
-    window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`
-}
 </script>
 
 <style scoped>
+:root {
+    --azul-profundo-seguranca: #1A535C;
+    --ciano-suave: #4ECDC4;
+    --cinza-neutro-claro: #6C757D;
+    --fundo-minimalista: #F4F7F6;
+    --preto-tipografico: #343A40;
+}
+
 .app-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    padding: 2.3rem 1.4rem 1.2rem;
+    min-height: 14rem;
+    height: auto;
     color: #d6d2e1;
     background:
-        radial-gradient(circle at 20% -10%, rgba(80, 74, 141, 0.3), transparent 45%),
-        radial-gradient(circle at 85% 15%, rgba(31, 72, 131, 0.18), transparent 42%),
-        linear-gradient(180deg, #080713 0%, #05040f 100%);
+        radial-gradient(circle at 20% -10%, var(--preto-tipografico), transparent 45%),
+        radial-gradient(circle at 85% 15%, var(--preto-tipografico), transparent 45%),
+        linear-gradient(180deg, var(--preto-tipografico) 0%, #05040f 100%);
 }
 
 .footer-shell {
-    width: min(100%, 1080px);
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 88%;
+    min-height: 12rem;
+    height: auto;
+    gap: 2rem;
 }
 
 .footer-top {
-    display: grid;
-    grid-template-columns: minmax(260px, 360px) 1fr;
-    gap: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    gap: 3.5rem;
+    flex-wrap: wrap;
 }
 
 .brand-column {
@@ -128,26 +118,14 @@ const sendEmail = () => {
     color: #8f8ba0;
     font-size: 0.84rem;
     line-height: 1.45;
-    max-width: 26rem;
+    width: 100%;
+    max-width: 24rem;
 }
 
 .email-form {
     width: 100%;
 }
 
-.email-input-wrapper {
-    width: min(100%, 260px);
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.62rem 0.78rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.8rem;
-    background: rgba(14, 11, 26, 0.9);
-    box-shadow:
-        inset 0 0 20px rgba(65, 69, 124, 0.1),
-        0 14px 26px rgba(0, 0, 0, 0.3);
-}
 
 .email-icon {
     color: #7a7494;
@@ -169,11 +147,12 @@ const sendEmail = () => {
 }
 
 .links-column {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(120px, 1fr));
-    gap: 1.1rem;
-    align-content: start;
-    padding-top: 2.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 52%;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .links-group {
@@ -202,119 +181,162 @@ const sendEmail = () => {
 }
 
 .footer-bottom {
-    margin-top: 2.2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding-top: 0.95rem;
+    border-top: 0.0625rem solid rgba(255, 255, 255, 0.08);
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 2.5rem;
     gap: 1rem;
+    flex-wrap: wrap;
     color: #5f5b73;
     font-size: 0.72rem;
 }
 
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-}
-
-@media (max-width: 640px) {
+@media (max-width: 767px) {
     .app-footer {
-        padding: 1.8rem 0.95rem 1.1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-shell {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 92%;
+        min-height: 20rem;
+        gap: 1.5rem;
     }
 
     .footer-top {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
         gap: 1.5rem;
     }
 
     .brand-column {
-        align-items: center;
-        text-align: center;
-    }
-
-    .brand-row {
-        justify-content: center;
-    }
-
-    .brand-title {
-        font-size: 1.08rem;
+        width: 100%;
     }
 
     .brand-copy {
-        font-size: 0.8rem;
-    }
-
-    .email-input-wrapper {
-        width: min(100%, 240px);
-        margin: 0 auto;
+        max-width: 100%;
     }
 
     .links-column {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        padding-top: 0;
-        gap: 0.8rem;
-        text-align: center;
+        width: 100%;
+        justify-content: space-between;
+        gap: 1.2rem;
     }
 
-    .group-title {
-        font-size: 0.88rem;
-    }
-
-    .footer-link {
-        font-size: 0.84rem;
+    .links-group {
+        width: 46%;
     }
 
     .footer-bottom {
         flex-direction: column;
-        gap: 0.35rem;
-        font-size: 0.69rem;
+        align-items: flex-start;
+        justify-content: center;
+        min-height: 3.2rem;
+        gap: 0.6rem;
     }
 }
 
-@media (max-width: 420px) {
+@media (min-width: 768px) and (max-width: 1023px) {
     .app-footer {
-        padding: 1.55rem 0.75rem 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
     }
 
-    .brand-copy {
-        font-size: 0.76rem;
-        line-height: 1.35;
+    .footer-shell {
+        width: 100%;
+        min-height: 15rem;
+        gap: 1.7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    .email-input-wrapper {
-        width: min(100%, 220px);
-        padding: 0.55rem 0.7rem;
-    }
-
-    .group-title {
-        font-size: 0.82rem;
-    }
-
-    .footer-link {
-        font-size: 0.8rem;
-    }
-
-    .footer-bottom {
-        font-size: 0.65rem;
-    }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
     .footer-top {
-        grid-template-columns: 1fr;
-        gap: 1.8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .brand-column {
+        width: 42%;
     }
 
     .links-column {
-        padding-top: 0;
-        grid-template-columns: repeat(3, minmax(100px, 1fr));
+        width: 54%;
+        gap: 1.8rem;
+    }
+
+    .footer-bottom {
+        min-height: 2.8rem;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .app-footer {
+        min-height: 14rem;
+    }
+
+    .footer-shell {
+        width: 86%;
+        min-height: 12rem;
+    }
+
+    .brand-column {
+        width: 38%;
+    }
+
+    .links-column {
+        width: 56%;
+        gap: 2.4rem;
+    }
+}
+
+@media (min-width: 1440px) {
+    .app-footer {
+        min-height: 16rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-shell {
+        width: 74%;
+        min-height: 14rem;
+        gap: 2.4rem;
+    }
+
+    .footer-top {
+        gap: 4.5rem;
+    }
+
+    .brand-column {
+        width: 34%;
+    }
+
+    .brand-copy {
+        max-width: 28rem;
+    }
+
+    .links-column {
+        width: 58%;
+        gap: 3.2rem;
+    }
+
+    .footer-bottom {
+        min-height: 3rem;
+        font-size: 0.8rem;
     }
 }
 </style>
