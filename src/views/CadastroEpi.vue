@@ -315,9 +315,11 @@ onMounted(carregar);
 
 <style scoped>
 .layout-shell {
-    width: min(980px, 92vw);
+    width: 92%;
+    max-width: 61rem;
     margin: 1.75rem auto 2.5rem;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 1.2rem;
 }
 
@@ -362,10 +364,14 @@ onMounted(carregar);
 }
 
 .hero-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.8rem;
     width: 100%;
+}
+
+.hero-metrics .metric-card {
+    flex: 1 1 12rem;
 }
 
 .metric-card {
@@ -400,8 +406,8 @@ onMounted(carregar);
 }
 
 .content-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 1.2rem;
     align-items: start;
 }
@@ -413,6 +419,21 @@ onMounted(carregar);
     border: 1px solid rgba(18, 55, 82, 0.08);
     background: rgba(255, 255, 255, 0.92);
     box-shadow: 0 16px 36px rgba(12, 20, 38, 0.08);
+}
+
+.card-form,
+.card-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.main-form {
+    overflow: auto;
+}
+
+.table-wrap {
+    overflow: auto;
 }
 
 .card-head,
@@ -448,14 +469,18 @@ onMounted(carregar);
 }
 
 .form-row {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.9rem;
     margin-bottom: 0.95rem;
 }
 
 .span-2 {
-    grid-column: 1 / -1;
+    flex: 1 1 100%;
+}
+
+.form-row > .form-group {
+    flex: 1 1 16rem;
 }
 
 .form-group {
@@ -676,7 +701,7 @@ input:focus {
 
 @media (max-width: 760px) {
     .layout-shell {
-        width: min(100% - 1rem, 1240px);
+        width: 96%;
         margin-top: 1rem;
         margin-bottom: 1.5rem;
     }
@@ -688,7 +713,7 @@ input:focus {
     }
 
     .hero-metrics {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 
     .metric-card strong {
@@ -696,11 +721,21 @@ input:focus {
     }
 
     .form-row {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+
+    .content-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-form,
+    .card-table {
+        width: 100%;
     }
 
     .span-2 {
-        grid-column: auto;
+        flex: 1 1 100%;
     }
 
     .row-actions {

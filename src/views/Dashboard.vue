@@ -16,34 +16,56 @@ import SideBar from '../../components/SideBar.vue'
 .dashboard-layout {
     width: 100%;
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 19rem 1fr;
-    gap: 1.2rem;
-    padding: 1rem;
-    background: #f3f8fc;
+    display: flex;
+}
+
+.dashboard-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 19rem;
+    height: 100vh;
+    z-index: 20;
 }
 
 .dashboard-content {
-    height: auto;
+    width: 100%;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-left: 19rem;
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 100%;
+    align-items: flex-start;
 }
 
-@media (max-width: 1024px) {
-    .dashboard-layout {
-        grid-template-columns: 14rem 1fr;
-        gap: 0.9rem;
+@media (max-width: 64rem) { /* ~1024px */
+    .dashboard-sidebar {
+        width: 14rem;
+    }
+
+    .dashboard-content {
+        margin-left: 14rem;
         padding: 0.8rem;
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 40rem) { /* ~640px */
     .dashboard-layout {
-        grid-template-columns: 5.2rem 1fr;
-        gap: 0.6rem;
-        padding: 0.5rem;
+        min-height: 100vh;
+    }
+
+    .dashboard-sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .dashboard-content {
+        margin-left: 0;
+        min-height: auto;
+        overflow: visible;
+        padding: 0.6rem;
     }
 }
 </style>

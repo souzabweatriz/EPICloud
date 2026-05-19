@@ -59,9 +59,11 @@ import AppFooter from '../../components/AppFooter.vue'
 
 <style scoped>
 .page-shell {
-    width: min(1120px, 92%);
+    width: 92%;
+    max-width: 70rem;
     margin: 2rem auto 3rem;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 1.1rem;
 }
 
@@ -114,6 +116,10 @@ p {
     overflow-x: auto;
 }
 
+.table-card table {
+    min-width: 40rem;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -161,6 +167,20 @@ td {
     .top-card {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .page-shell {
+        width: 96%;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .table-card {
+        padding: 0.65rem;
+    }
+
+    .primary-action {
+        width: 100%;
     }
 }
 </style>

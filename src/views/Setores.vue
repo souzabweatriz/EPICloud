@@ -227,9 +227,11 @@ onMounted(carregarDados)
 
 <style scoped>
 .layout-shell {
-    width: min(980px, 92vw);
+    width: 92%;
+    max-width: 61rem;
     margin: 1.75rem auto 2.5rem;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 1.2rem;
 }
 
@@ -274,10 +276,14 @@ onMounted(carregarDados)
 }
 
 .hero-metrics {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.8rem;
     width: 100%;
+}
+
+.hero-metrics .metric-card {
+    flex: 1 1 12rem;
 }
 
 .metric-card {
@@ -304,10 +310,10 @@ onMounted(carregarDados)
 }
 
 .content-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 1.2rem;
-    align-items: start;
+    align-items: stretch;
 }
 
 .card-form,
@@ -317,6 +323,25 @@ onMounted(carregarDados)
     border: 1px solid rgba(18, 55, 82, 0.08);
     background: rgba(255, 255, 255, 0.92);
     box-shadow: 0 16px 36px rgba(12, 20, 38, 0.08);
+}
+
+.card-form,
+.card-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 20rem;
+}
+
+.main-form {
+    padding: 1.2rem;
+}
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    max-height: none;
 }
 
 .card-head,
@@ -351,14 +376,18 @@ onMounted(carregarDados)
 }
 
 .form-row {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.9rem;
     margin-bottom: 0.95rem;
 }
 
 .span-2 {
-    grid-column: 1 / -1;
+    flex: 1 1 100%;
+}
+
+.form-row > .form-group {
+    flex: 1 1 16rem;
 }
 
 .form-group {
@@ -519,17 +548,17 @@ label {
 
 @media (max-width: 760px) {
     .layout-shell {
-        width: min(100% - 1rem, 980px);
+        width: 96%;
         margin-top: 1rem;
         margin-bottom: 1.5rem;
     }
 
     .form-row {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 
     .span-2 {
-        grid-column: auto;
+        flex: 1 1 100%;
     }
 
     .hero-card,
@@ -539,7 +568,13 @@ label {
     }
 
     .hero-metrics {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+
+    .card-form,
+    .card-table {
+        width: 100%;
+        min-height: auto;
     }
 }
 </style>

@@ -59,16 +59,20 @@ async function sair() {
     flex-direction: column;
     justify-content: space-between;
     gap: 1.5rem;
-    width: min(100%, 18rem);
-    min-height: calc(100vh - 2rem);
+    width: 100%;
+    max-width: 18rem;
+    min-height: 100vh;
     padding: 1.5rem 1.25rem;
+    border-radius: 0;
     border: 1px solid rgba(18, 55, 82, 0.08);
-    border-radius: 1.5rem;
     background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(243, 248, 252, 0.92) 100%);
     box-shadow: 0 18px 40px rgba(18, 55, 82, 0.12);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    border-radius: 0;
+    max-width: 19rem;
+    min-height: 100vh;
 }
 
 .logo {
@@ -174,7 +178,7 @@ async function sair() {
 @media (max-width: 900px) {
     .sidebar>.sidebar {
         width: 100%;
-        min-height: calc(100vh - 1.6rem);
+        min-height: 100vh;
         padding: 1rem 0.8rem;
     }
 }
@@ -185,6 +189,7 @@ async function sair() {
         padding: 0.8rem 0.45rem;
         gap: 0.8rem;
         align-items: center;
+        min-height: auto;
     }
 
     .logo {

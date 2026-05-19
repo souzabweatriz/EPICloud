@@ -178,7 +178,8 @@ import AppFooter from '/components/AppFooter.vue'
 
 .epis-showcase {
     position: relative;
-    width: min(100%, 62rem);
+    width: 100%;
+    max-width: 62rem;
     height: 40rem;
     margin-top: 0.4rem;
     display: flex;
@@ -215,9 +216,15 @@ import AppFooter from '/components/AppFooter.vue'
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.88rem;
+    min-height: 2.4rem;
+    min-width: 9rem;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1;
     white-space: nowrap;
     flex-shrink: 0;
+    box-shadow: 0 10px 24px rgba(18, 55, 82, 0.08);
 }
 
 .section-text {
@@ -327,7 +334,8 @@ import AppFooter from '/components/AppFooter.vue'
 }
 
 .benefits-section {
-    width: min(100%, 84rem);
+    width: 100%;
+    max-width: 84rem;
     padding: 2.8rem 0.7rem 3.5rem;
     display: flex;
     flex-direction: column;
@@ -354,7 +362,8 @@ import AppFooter from '/components/AppFooter.vue'
 .benefits-subtitle {
     font-size: 1.15rem;
     color: #5f6775;
-    width: min(100%, 46rem);
+    width: 100%;
+    max-width: 46rem;
     line-height: 1.45;
 }
 
@@ -371,7 +380,7 @@ import AppFooter from '/components/AppFooter.vue'
     flex: 1 1 16rem;
     max-width: 18rem;
     background: #ffffff;
-    border: 1px solid #cfdbe5;
+    border: 2px solid #cfdbe5;
     border-radius: 1rem;
     min-height: 16rem;
     padding: 1.3rem 1.15rem;
@@ -381,6 +390,13 @@ import AppFooter from '/components/AppFooter.vue'
     align-items: center;
     gap: 0.85rem;
     text-align: center;
+    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.35s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-0.45rem);
+    box-shadow: 0 18px 34px rgba(18, 55, 82, 0.18);
+    border-color: #9bb8cc;
 }
 
 .benefit-icon {
@@ -521,8 +537,10 @@ import AppFooter from '/components/AppFooter.vue'
     }
 
     .carousel-text {
-        font-size: 0.76rem;
-        padding: 0.52rem 0.68rem;
+        min-height: 2.2rem;
+        min-width: 8.2rem;
+        font-size: 0.86rem;
+        padding: 0.55rem 0.8rem;
     }
 
     .carousel-track {
@@ -657,8 +675,10 @@ import AppFooter from '/components/AppFooter.vue'
     }
 
     .carousel-text {
-        font-size: 0.72rem;
-        padding: 0.45rem 0.62rem;
+        min-height: 2.0rem;
+        min-width: 7.5rem;
+        font-size: 0.78rem;
+        padding: 0.5rem 0.7rem;
     }
 }
 </style>

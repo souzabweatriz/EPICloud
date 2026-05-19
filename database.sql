@@ -47,6 +47,7 @@ CREATE TABLE entregas (
     id_funcionario INTEGER NOT NULL,
     id_epi INTEGER NOT NULL,
     quantidade INTEGER NOT NULL DEFAULT 1,
+    quantidade_entregue INTEGER,
     data_entrega DATE NOT NULL,
     observacoes TEXT,
     FOREIGN KEY (id_funcionario)

@@ -359,6 +359,7 @@ onMounted(carregarDepartamentos)
 .form-card {
     width: 76%;
     height: auto;
+    min-height: 24rem;
     border-radius: 1rem;
     border: 0.0625rem solid rgba(18, 55, 82, 0.1);
     background: rgba(255, 255, 255, 0.88);
@@ -368,7 +369,7 @@ onMounted(carregarDepartamentos)
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
 }
 
@@ -564,6 +565,21 @@ select.input-field {
 .table-wrap {
     width: 100%;
     overflow-x: auto;
+    overflow-y: visible;
+    max-height: none;
+}
+
+/* Ensure stacked layout and full-width on small screens */
+@media (max-width: 760px) {
+    .form-card,
+    .table-card {
+        width: 96%;
+        min-height: auto;
+    }
+
+    .table-wrap {
+        max-height: none;
+    }
 }
 
 .styled-table {
@@ -629,6 +645,7 @@ select.input-field {
 }
 
 .text-center {
+    display: flex;
     text-align: center;
 }
 
@@ -660,38 +677,5 @@ select.input-field {
     background: linear-gradient(135deg, #e8f3fb, #d7e9f5);
     color: #4a7fa8;
     font-size: 1rem;
-}
-
-@media (max-width: 67.5rem) {
-    .form-panel {
-        width: 100%;
-        height: auto;
-    }
-
-    .form-card,
-    .table-card {
-        width: 92%;
-        height: auto;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 40rem) {
-    .form-card {
-        padding: 1.2rem;
-        border-radius: 0.9rem;
-    }
-
-    .actions-row {
-        flex-direction: column;
-    }
-
-    .label-btn,
-    .ghost-btn {
-        width: 100%;
-    }
 }
 </style>
