@@ -41,10 +41,11 @@ import { useSupabase } from '../src/composables/useSupabase'
 
 const router = useRouter()
 const { supabase } = useSupabase()
+const LOGIN_SESSION_KEY = 'epicloud_login_session'
 
 async function sair() {
     try {
-        await supabase.auth.signOut()
+        sessionStorage.removeItem(LOGIN_SESSION_KEY)
         router.push('/login')
     } catch (error) {
         console.error('Erro ao sair:', error)

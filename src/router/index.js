@@ -9,9 +9,7 @@ import Sobre from '../views/Sobre.vue'
 import CadastroEpi from '../views/CadastroEpi.vue'
 import Entregas from '../views/Entregas.vue'
 import Estoque from '../views/Estoque.vue'
-
-
-const { supabase } = useSupabase()
+const LOGIN_SESSION_KEY = 'epicloud_login_session'
 
 const routes = [
     {
@@ -72,7 +70,7 @@ const router = createRouter({ history: createWebHistory(), routes })
 
 router.beforeEach(async (to) => {
     const requiresAuth = to.matched.some(r => r.meta.requiresAuth)
-    const { data: { session } } = await supabase.auth.getSession()
+    const session = sessionStorage.getItem(LOGIN_SESSION_KEY)
 
     if (requiresAuth && !session) {
         return '/login'

@@ -47,26 +47,49 @@ const email = ref('')
 const password = ref('')
 const loading = ref(false)
 const erro = ref('')
+const LOGIN_SESSION_KEY = 'epicloud_login_session'
 
 async function fazerLogin() {
     erro.value = ''
     loading.value = true
 
     try {
-        const { error } = await supabase.auth.signInWithPassword({
-            email: email.value,
-            password: password.value
-        })
+        const emailDigitado = email.value.trim().toLowerCase()
+        const senhaDigitada = password.value
+
+        const { data, error } = await supabase
+            .from('funcionarios')
+            .select('id_funcionario, nome, email, cargo, foto, id_departamento, senha')
+            .eq('email', emailDigitado)
+            .maybeSingle()
 
         if (error) {
-            erro.value = 'Falha no login. Verifique suas credenciais.'
+            erro.value = 'Falha ao consultar o cadastro do funcionario.'
             return
         }
+
+        if (!data || data.senha !== senhaDigitada) {
+            erro.value = 'E-mail ou senha incorretos.'
+            return
+        }
+
+        sessionStorage.setItem(LOGIN_SESSION_KEY, JSON.stringify({
+            id: data.id_funcionario,
+            nome: data.nome,
+            email: data.email,
+            cargo: data.cargo,
+            foto: data.foto,
+            id_departamento: data.id_departamento
+        }))
 
         router.push('/dashboard')
     } finally {
         loading.value = false
     }
+}
+
+if (sessionStorage.getItem(LOGIN_SESSION_KEY)) {
+    router.replace('/dashboard')
 }
 </script>
 
