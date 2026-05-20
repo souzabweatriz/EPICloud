@@ -74,6 +74,13 @@
                         </div>
                     </div>
 
+                    <div class="form-row">
+                        <div class="form-group span-2">
+                            <label>URL da foto</label>
+                            <input v-model="form.foto" type="text" placeholder="https://..." >
+                        </div>
+                    </div>
+
                     <p v-if="mensagemErro" class="form-feedback error">{{ mensagemErro }}</p>
                     <p v-if="mensagemSucesso" class="form-feedback success">{{ mensagemSucesso }}</p>
 
@@ -160,7 +167,8 @@ const form = reactive({
     fabricante: '',
     dt_validade: '',
     periodicidade_meses: '',
-    estoque: ''
+    estoque: '',
+    foto: ''
 });
 
 const quantidadeBaixa = ref(0);
@@ -198,7 +206,8 @@ const salvar = async () => {
         fabricante: form.fabricante.trim() || null,
         dt_validade: form.dt_validade,
         periodicidade_meses: form.periodicidade_meses === '' ? null : Number(form.periodicidade_meses),
-        estoque: Number(form.estoque)
+        estoque: Number(form.estoque),
+        foto: form.foto.trim() || null
     };
 
     if (editandoId.value) {
@@ -235,7 +244,8 @@ const prepararEdicao = (e) => {
         fabricante: e.fabricante || '',
         dt_validade: e.dt_validade || '',
         periodicidade_meses: e.periodicidade_meses ?? '',
-        estoque: e.estoque ?? 0
+        estoque: e.estoque ?? 0,
+        foto: e.foto || ''
     });
 };
 
@@ -264,7 +274,8 @@ const cancelarEdicao = () => {
         fabricante: '',
         dt_validade: '',
         periodicidade_meses: '',
-        estoque: ''
+        estoque: '',
+        foto: ''
     });
 };
 

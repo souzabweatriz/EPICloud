@@ -26,6 +26,7 @@ import SideBar from '../../components/SideBar.vue'
     width: 19rem;
     height: 100vh;
     z-index: 20;
+    
 }
 
 .dashboard-content {

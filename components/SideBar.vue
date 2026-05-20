@@ -1,9 +1,8 @@
 <template>
     <div class="sidebar">
         <aside class="sidebar">
-            <h1 class="logo">
-                <i class="fas fa-shield-alt"></i>
-                EPICloud
+            <h1 class="logo-img">
+            <img src="../public/Image/logo.png" alt="logo do site" class="logo-img">
             </h1>
             <nav class="menu">
                 <RouterLink to="/dashboard/funcionario" class="menu-item" active-class="active">
@@ -13,6 +12,10 @@
                 <RouterLink to="/dashboard/entregas" class="menu-item" active-class="active">
                     <i class="fas fa-box"></i>
                     <span>Entregas de EPI</span>
+                </RouterLink>
+                <RouterLink to="/dashboard/estoque" class="menu-item" active-class="active">
+                    <i class="fas fa-warehouse"></i>
+                    <span>Estoque</span>
                 </RouterLink>
                 <RouterLink to="/dashboard/relatorio" class="menu-item" active-class="active">
                     <i class="fas fa-chart-bar"></i>
@@ -54,6 +57,21 @@ async function sair() {
     width: 100%;
 }
 
+.logo-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem 0;
+    margin: 0;
+}
+
+.logo-img img {
+    width: auto;
+    height: 6rem;
+    object-fit: contain;
+}
+
 .sidebar>.sidebar {
     display: flex;
     flex-direction: column;
@@ -78,24 +96,9 @@ async function sair() {
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.25rem;
-    color: var(--text-main);
-    font-size: 1.05rem;
-    font-weight: 800;
-    letter-spacing: 0.01em;
+    justify-content: center;
 }
 
-.logo i {
-    display: grid;
-    place-items: center;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: 0.9rem;
-    background: linear-gradient(135deg, #123752, #2b8ac8);
-    color: #fff;
-    box-shadow: 0 10px 22px rgba(18, 55, 82, 0.22);
-}
 
 .menu {
     display: flex;

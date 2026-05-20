@@ -8,6 +8,7 @@ import Setores from '../views/Setores.vue'
 import Sobre from '../views/Sobre.vue'
 import CadastroEpi from '../views/CadastroEpi.vue'
 import Entregas from '../views/Entregas.vue'
+import Estoque from '../views/Estoque.vue'
 
 
 const { supabase } = useSupabase()
@@ -59,6 +60,7 @@ const routes = [
         children: [
             { path: '', redirect: '/dashboard/funcionario' },
             { path: 'entregas', name: 'entregas', component: Entregas },
+            { path: 'estoque', name: 'estoque', component: Estoque },
             { path: 'relatorio', name: 'relatorio', component: Setores },
             { path: 'cadastro', name: 'cadastroEpi', alias: '/dashboard/CadastroEpi', component: CadastroEpi },
             { path: 'funcionario', name: 'funcionario', component: CadastroFunc }
