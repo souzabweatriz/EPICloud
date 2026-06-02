@@ -4,7 +4,7 @@
             <div class="hero-content">
                 <img src="../../public/Image/logo.png" class="logo" alt="LOGO">
                 <p class="hero-eyebrow">EPICloud</p>
-                <h2 class="hero-title">Protecao que organiza, controla e inspira.</h2>
+                <h2 class="hero-title">Proteção que organiza, controla e inspira.</h2>
                 <p class="hero-phrase">Sua operação merece precisão em cada entrega.</p>
                 <p class="hero-motion">Segurança. Controle. Evolução.</p>
             </div>
@@ -13,7 +13,7 @@
         <section class="auth-card">
             <p class="eyebrow">Acesso seguro</p>
             <h1>Entrar na plataforma</h1>
-            <p class="subtitle">Use suas credenciais para acessar os modulos de EPIs e setores.</p>
+            <p class="subtitle">Use suas credenciais para acessar os módulos de EPIs e setores.</p>
             <form class="auth-form" @submit.prevent="fazerLogin">
                 <label class="field-group">
                     <span class="field-label">E-mail</span>
@@ -47,33 +47,28 @@ const email = ref('')
 const password = ref('')
 const loading = ref(false)
 const erro = ref('')
-const LOGIN_SESSION_KEY = 'epicloud_login_session'
+
 
 async function fazerLogin() {
     erro.value = ''
     loading.value = true
 
     try {
-        const emailDigitado = email.value.trim().toLowerCase()
-        const senhaDigitada = password.value
-
         const { data, error } = await supabase
             .from('funcionarios')
             .select('id_funcionario, nome, email, cargo, foto, id_departamento, senha')
-            .eq('email', emailDigitado)
+            .eq('email', email.value.trim().toLowerCase())
             .maybeSingle()
 
-        if (error) {
-            erro.value = 'Falha ao consultar o cadastro do funcionario.'
-            return
-        }
-
-        if (!data || data.senha !== senhaDigitada) {
+        if (error || !data || data.senha !== password.value) {
             erro.value = 'E-mail ou senha incorretos.'
             return
         }
 
-        sessionStorage.setItem(LOGIN_SESSION_KEY, JSON.stringify({
+        // Cria sessão no Auth para o RLS funcionar
+        await supabase.auth.signInAnonymously()
+
+        localStorage.setItem('epicloud_funcionario', JSON.stringify({
             id: data.id_funcionario,
             nome: data.nome,
             email: data.email,
@@ -83,13 +78,10 @@ async function fazerLogin() {
         }))
 
         router.push('/dashboard')
+
     } finally {
         loading.value = false
     }
-}
-
-if (sessionStorage.getItem(LOGIN_SESSION_KEY)) {
-    router.replace('/dashboard')
 }
 </script>
 

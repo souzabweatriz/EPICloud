@@ -1,90 +1,121 @@
 <template>
-    <main class="cadastro-page">
-        <section class="form-panel">
-            <div class="form-card">
-                <p class="eyebrow">Controle de efetivo</p>
-                <h2>{{ editandoId ? 'Alterar registro de funcionario' : 'Novo funcionario' }}</h2>
-                <p class="subtitle">Cadastre os dados do funcionario conforme a base do Supabase.</p>
+    <div class="layout-shell">
+        <header class="hero-card">
+            <div class="hero-top">
+                <div class="hero-copy">
+                    <p class="eyebrow">Controle de efetivo</p>
+                    <h1>{{ editandoId ? 'Editar funcionário' : 'Funcionários' }}</h1>
+                    <p class="hero-text">Gerencie o cadastro de colaboradores, cargos e departamentos.</p>
+                </div>
+                <div class="hero-metrics">
+                    <article class="metric-card">
+                        <i class="ti ti-users metric-icon" aria-hidden="true"></i>
+                        <span class="metric-label">Total cadastrado</span>
+                        <strong>{{ funcionarios.length }}</strong>
+                    </article>
+                    <article class="metric-card accent">
+                        <i class="ti ti-building metric-icon" aria-hidden="true"></i>
+                        <span class="metric-label">Departamentos</span>
+                        <strong>{{ departamentos.length }}</strong>
+                    </article>
+                </div>
+            </div>
+        </header>
 
-                <form class="auth-form" @submit.prevent="salvar">
+        <main class="content-grid">
+            <section class="card-form">
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <i class="ti ti-user-plus header-icon" aria-hidden="true"></i>
+                        <div>
+                            <p class="card-kicker">Registro</p>
+                            <h3>{{ editandoId ? 'Alterar dados do funcionário' : 'Novo funcionário' }}</h3>
+                        </div>
+                    </div>
+                    <span v-if="editandoId" class="badge-editing">Em edição</span>
+                </div>
+
+                <form @submit.prevent="salvar" class="main-form">
                     <div class="form-row">
-                        <label class="input-func">
-                            Nome completo
-                            <input class="input-field" v-model="form.nome" type="text" placeholder="Digite o nome"
-                                required />
-                        </label>
-
-                        <label class="input-func">
-                            E-mail
-                            <input class="input-field" v-model="form.email" type="email" placeholder="nome@empresa.com"
-                                required />
-                        </label>
+                        <div class="form-group">
+                            <label>Nome completo</label>
+                            <input v-model="form.nome" type="text" placeholder="Digite o nome completo" required class="input-field">
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input v-model="form.email" type="email" placeholder="nome@empresa.com" required class="input-field">
+                        </div>
                     </div>
 
                     <div class="form-row">
-                        <label class="input-func">
-                            Cargo
-                            <input class="input-field" v-model="form.cargo" type="text"
-                                placeholder="Ex: Analista de segurança" required />
-                        </label>
-
-                        <label class="input-func">
-                            Departamento
-                            <select class="input-field" v-model="form.id_departamento" required>
+                        <div class="form-group">
+                            <label>Cargo</label>
+                            <input v-model="form.cargo" type="text" placeholder="Ex: Analista de segurança" required class="input-field">
+                        </div>
+                        <div class="form-group">
+                            <label>Departamento</label>
+                            <select v-model="form.id_departamento" required class="input-field">
                                 <option value="" disabled>Selecione o departamento</option>
-                                <option v-for="departamento in departamentos" :key="departamento.id_departamento"
-                                    :value="departamento.id_departamento">
-                                    {{ departamento.nome_departamento }}
+                                <option v-for="d in departamentos" :key="d.id_departamento" :value="d.id_departamento">
+                                    {{ d.nome_departamento }}
                                 </option>
                             </select>
-                        </label>
+                        </div>
                     </div>
 
                     <div class="form-row">
-                        <label class="input-func">
-                            Data de nascimento
-                            <input class="input-field" v-model="form.data_nascimento" type="date" required />
-                        </label>
-
-                        <label class="input-func">
-                            Senha
-                            <div class="password-field">
-                                <input class="input-field" v-model="form.senha" :type="mostrarSenha ? 'text' : 'password'"
-                                    placeholder="Minimo 6 caracteres" required minlength="6" />
-                                <button class="password-toggle" type="button" @click="mostrarSenha = !mostrarSenha"
+                        <div class="form-group">
+                            <label>Data de nascimento</label>
+                            <input v-model="form.data_nascimento" type="date" required class="input-field">
+                        </div>
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <div class="password-wrap">
+                                <input v-model="form.senha" :type="mostrarSenha ? 'text' : 'password'"
+                                    placeholder="Mínimo 6 caracteres" required minlength="6" class="input-field">
+                                <button type="button" class="btn-toggle-pass" @click="mostrarSenha = !mostrarSenha"
                                     :aria-label="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'">
-                                    <i class="pi" :class="mostrarSenha ? 'pi-eye-slash' : 'pi-eye'"></i>
+                                    <i class="ti" :class="mostrarSenha ? 'ti-eye-off' : 'ti-eye'"></i>
                                 </button>
                             </div>
-                        </label>
+                        </div>
                     </div>
 
                     <div class="form-row">
-                        <label class="input-func">
-                            URL da foto (opcional)
-                            <input class="input-field" v-model="form.foto" type="text" placeholder="https://..." />
-                        </label>
+                        <div class="form-group span-2">
+                            <label>URL da foto <span class="label-optional">(opcional)</span></label>
+                            <input v-model="form.foto" type="text" placeholder="https://..." class="input-field">
+                        </div>
                     </div>
 
-                    <div class="actions-row">
-                        <button class="label-btn" type="submit" :disabled="loading">
-                            {{ loading ? 'Salvando...' : (editandoId ? 'Atualizar dados' : 'Finalizar cadastro') }}
+                    <p v-if="message" class="form-feedback" :class="messageType">
+                        <i class="ti" :class="messageType === 'success' ? 'ti-circle-check' : 'ti-alert-circle'"></i>
+                        {{ message }}
+                    </p>
+
+                    <div class="action-bar">
+                        <button type="submit" class="btn btn-primary" :disabled="loading">
+                            <i class="ti ti-send" aria-hidden="true"></i>
+                            {{ loading ? 'Salvando...' : (editandoId ? 'Salvar alterações' : 'Cadastrar funcionário') }}
                         </button>
-                        <button class="ghost-btn" type="button" @click="cancelarEdicao">
+                        <button type="button" class="btn btn-outline" @click="cancelarEdicao">
+                            <i class="ti" :class="editandoId ? 'ti-x' : 'ti-eraser'" aria-hidden="true"></i>
                             {{ editandoId ? 'Cancelar' : 'Limpar' }}
                         </button>
                     </div>
                 </form>
+            </section>
 
-                <p v-if="message" class="status-message" :class="messageType">{{ message }}</p>
-
-                <p class="helper-note">Dica: ao criar um novo funcionario, confirme o departamento correto antes de
-                    salvar.</p>
-            </div>
-
-            <div class="table-card">
-                <div class="table-header">
-                    <h3>Funcionarios cadastrados</h3>
+            <section class="card-table">
+                <div class="section-header">
+                    <div class="section-title-group">
+                        <i class="ti ti-list-details header-icon" aria-hidden="true"></i>
+                        <div>
+                            <p class="card-kicker">Equipe</p>
+                            <h3>Funcionários cadastrados</h3>
+                        </div>
+                    </div>
+                    <span class="table-count">{{ funcionarios.length }} registros</span>
                 </div>
 
                 <div class="table-wrap">
@@ -95,44 +126,79 @@
                                 <th>E-mail</th>
                                 <th>Cargo / Departamento</th>
                                 <th>Nascimento</th>
-                                <th class="text-center">Gerenciar</th>
+                                <th class="text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-if="!funcionarios.length">
-                                <td colspan="6" class="empty-row">Nenhum funcionario cadastrado ainda.</td>
+                                <td colspan="5" class="empty-state">
+                                    <i class="ti ti-users-off empty-icon"></i>
+                                    <span>Nenhum funcionário cadastrado ainda.</span>
+                                </td>
                             </tr>
                             <tr v-for="f in funcionarios" :key="getRowId(f)">
                                 <td>
                                     <div class="colaborador-cell">
-                                        <img v-if="f.foto" :src="f.foto" :alt="f.nome" class="avatar">
-                                        <div v-else class="avatar placeholder">
-                                            <i class="pi pi-user"></i>
-                                        </div>
+                                        <img
+                                            v-if="f.foto"
+                                            :src="f.foto"
+                                            :alt="f.nome"
+                                            class="avatar-img"
+                                            @click="abrirFoto(f)"
+                                            title="Clique para ampliar"
+                                        >
+                                        <div v-else class="avatar-initials">{{ iniciais(f.nome) }}</div>
                                         <span class="text-bold">{{ f.nome }}</span>
                                     </div>
                                 </td>
-                                <td>{{ f.email }}</td>
+                                <td class="text-muted">{{ f.email }}</td>
                                 <td>
-                                    <span class="badge">{{ getDepartamentoNome(f.id_departamento) }}</span>
-                                    <span class="cargo-text">{{ f.cargo }}</span>
+                                    <div class="cargo-cell">
+                                        <span class="badge-depto">{{ getDepartamentoNome(f.id_departamento) }}</span>
+                                        <span class="cargo-text">{{ f.cargo }}</span>
+                                    </div>
                                 </td>
-                                <td>{{ f.data_nascimento }}</td>
+                                <td class="text-muted">{{ formatarData(f.data_nascimento) }}</td>
                                 <td class="text-center">
-                                    <button @click="prepararEdicao(f)" class="btn-action edit">Editar</button>
-                                    <button @click="excluir(getRowId(f))" class="btn-action delete">Excluir</button>
+                                    <div class="row-actions">
+                                        <button @click="prepararEdicao(f)" class="btn-icon edit" title="Editar">
+                                            <i class="ti ti-pencil"></i>
+                                        </button>
+                                        <button @click="excluir(getRowId(f))" class="btn-icon delete" title="Excluir">
+                                            <i class="ti ti-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+            </section>
+        </main>
+
+        <!-- Lightbox -->
+        <Transition name="lightbox">
+            <div v-if="fotoAberta" class="lightbox-overlay" @click="fecharFoto">
+                <div class="lightbox-box" @click.stop>
+                    <button class="lightbox-close" @click="fecharFoto" aria-label="Fechar">
+                        <i class="ti ti-x"></i>
+                    </button>
+                    <img :src="fotoAberta.src" :alt="fotoAberta.nome" class="lightbox-img">
+                    <div class="lightbox-info">
+                        <div class="lightbox-avatar-initials">{{ iniciais(fotoAberta.nome) }}</div>
+                        <div>
+                            <p class="lightbox-nome">{{ fotoAberta.nome }}</p>
+                            <p class="lightbox-cargo">{{ fotoAberta.cargo }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-    </main>
+        </Transition>
+    </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import { useSupabase } from '../composables/useSupabase.js'
 
 const { supabase } = useSupabase()
@@ -143,85 +209,57 @@ const messageType = ref('')
 const funcionarios = ref([])
 const departamentos = ref([])
 const editandoId = ref(null)
-const idColumn = ref('id')
 const mostrarSenha = ref(false)
+const fotoAberta = ref(null)
 
 const form = reactive({
-    nome: '',
-    cargo: '',
-    email: '',
-    senha: '',
-    data_nascimento: '',
-    id_departamento: '',
-    foto: ''
+    nome: '', cargo: '', email: '', senha: '',
+    data_nascimento: '', id_departamento: '', foto: ''
 })
 
+function abrirFoto(f) {
+    if (!f.foto) return
+    fotoAberta.value = { src: f.foto, nome: f.nome, cargo: f.cargo || '' }
+    document.body.style.overflow = 'hidden'
+}
+
+function fecharFoto() {
+    fotoAberta.value = null
+    document.body.style.overflow = ''
+}
+
+function onKeydown(e) {
+    if (e.key === 'Escape') fecharFoto()
+}
+
+onMounted(() => window.addEventListener('keydown', onKeydown))
+onUnmounted(() => window.removeEventListener('keydown', onKeydown))
+
 function limparForm() {
-    Object.assign(form, {
-        nome: '',
-        cargo: '',
-        email: '',
-        senha: '',
-        data_nascimento: '',
-        id_departamento: '',
-        foto: ''
-    })
+    Object.assign(form, { nome: '', cargo: '', email: '', senha: '', data_nascimento: '', id_departamento: '', foto: '' })
     mostrarSenha.value = false
     message.value = ''
     messageType.value = ''
-}
-
-async function carregar() {
-    const { data, error } = await supabase
-        .from('funcionarios')
-        .select('*')
-        .order('nome', { ascending: true })
-
-    if (error) {
-        message.value = 'Erro ao carregar funcionarios.'
-        messageType.value = 'error'
-        return
-    }
-
-    if (data?.length) {
-        const firstRow = data[0]
-        if ('id' in firstRow) {
-            idColumn.value = 'id'
-        } else if ('id_funcionario' in firstRow) {
-            idColumn.value = 'id_funcionario'
-        }
-    }
-
-    funcionarios.value = data || []
-}
-
-async function carregarDepartamentos() {
-    const { data, error } = await supabase
-        .from('departamento')
-        .select('id_departamento, nome_departamento')
-        .order('id_departamento', { ascending: true })
-
-    if (error) {
-        message.value = 'Erro ao carregar departamentos.'
-        messageType.value = 'error'
-        return
-    }
-
-    departamentos.value = data || []
 }
 
 function getRowId(row) {
     return row?.id ?? row?.id_funcionario ?? null
 }
 
-function getDepartamentoNome(idDepartamento) {
-    if (!idDepartamento) {
-        return 'Departamento'
-    }
+function getDepartamentoNome(id) {
+    if (!id) return '—'
+    return departamentos.value.find(d => String(d.id_departamento) === String(id))?.nome_departamento || '—'
+}
 
-    const departamento = departamentos.value.find((item) => String(item.id_departamento) === String(idDepartamento))
+function iniciais(nome) {
+    return (nome || '').split(' ').slice(0, 2).map(p => p[0]).join('').toUpperCase()
+}
 
-    return departamento?.nome_departamento || 'Departamento'
+function formatarData(valor) {
+    if (!valor) return '—'
+    const d = new Date(valor)
+    if (Number.isNaN(d.getTime())) return valor
+    return d.toLocaleDateString('pt-BR')
 }
 
 function cancelarEdicao() {
@@ -229,47 +267,45 @@ function cancelarEdicao() {
     limparForm()
 }
 
-function prepararEdicao(funcionario) {
-    editandoId.value = getRowId(funcionario)
+function prepararEdicao(f) {
+    editandoId.value = getRowId(f)
     Object.assign(form, {
-        nome: funcionario.nome || '',
-        cargo: funcionario.cargo || '',
-        email: funcionario.email || '',
-        senha: funcionario.senha || '',
-        data_nascimento: funcionario.data_nascimento || '',
-        id_departamento: funcionario.id_departamento ?? '',
-        foto: funcionario.foto || ''
+        nome: f.nome || '', cargo: f.cargo || '', email: f.email || '',
+        senha: f.senha || '', data_nascimento: f.data_nascimento || '',
+        id_departamento: f.id_departamento ?? '', foto: f.foto || ''
     })
     mostrarSenha.value = false
+    message.value = ''
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+async function carregar() {
+    const { data, error } = await supabase.from('funcionarios').select('*').order('nome')
+    if (error) { message.value = 'Erro ao carregar funcionários.'; messageType.value = 'error'; return }
+    funcionarios.value = data || []
+}
+
+async function carregarDepartamentos() {
+    const { data, error } = await supabase.from('departamento').select('id_departamento, nome_departamento').order('id_departamento')
+    if (error) { message.value = 'Erro ao carregar departamentos.'; messageType.value = 'error'; return }
+    departamentos.value = data || []
 }
 
 async function salvar() {
     loading.value = true
     message.value = ''
-    messageType.value = ''
+
+    const payload = {
+        nome: form.nome, cargo: form.cargo, email: form.email,
+        senha: form.senha, data_nascimento: form.data_nascimento,
+        id_departamento: form.id_departamento || null,
+        foto: form.foto || null
+    }
 
     if (editandoId.value) {
-        const { error: updateError } = await supabase
-            .from('funcionarios')
-            .update({
-                nome: form.nome,
-                cargo: form.cargo,
-                email: form.email,
-                senha: form.senha,
-                data_nascimento: form.data_nascimento,
-                id_departamento: form.id_departamento || null,
-                foto: form.foto || null
-            })
-            .eq(idColumn.value, editandoId.value)
-
+        const { error } = await supabase.from('funcionarios').update(payload).eq('id_funcionario', editandoId.value)
         loading.value = false
-
-        if (updateError) {
-            message.value = `Nao foi possivel atualizar o cadastro. (${updateError.message})`
-            messageType.value = 'error'
-            return
-        }
-
+        if (error) { message.value = `Não foi possível atualizar. (${error.message})`; messageType.value = 'error'; return }
         message.value = 'Cadastro atualizado com sucesso.'
         messageType.value = 'success'
         await carregar()
@@ -277,52 +313,21 @@ async function salvar() {
         return
     }
 
-    const { error: insertError } = await supabase.from('funcionarios').insert([
-        {
-            nome: form.nome,
-            cargo: form.cargo,
-            email: form.email,
-            senha: form.senha,
-            data_nascimento: form.data_nascimento,
-            id_departamento: form.id_departamento || null,
-            foto: form.foto || null
-        }
-    ])
-
+    const { error } = await supabase.from('funcionarios').insert([payload])
     loading.value = false
-
-    if (insertError) {
-        message.value = 'A conta foi criada, mas houve falha ao salvar dados do funcionario.'
-        messageType.value = 'error'
-        return
-    }
-
-    message.value = 'Funcionario cadastrado com sucesso. Compartilhe as credenciais com ele.'
+    if (error) { message.value = `Não foi possível cadastrar. (${error.message})`; messageType.value = 'error'; return }
+    message.value = 'Funcionário cadastrado com sucesso.'
     messageType.value = 'success'
     limparForm()
     await carregar()
 }
 
 async function excluir(id) {
-    if (!confirm('Deseja realmente remover este registro?')) {
-        return
-    }
-
-    if (!id) {
-        message.value = 'Nao foi possivel identificar o registro para exclusao.'
-        messageType.value = 'error'
-        return
-    }
-
-    const { error } = await supabase.from('funcionarios').delete().eq(idColumn.value, id)
-
-    if (error) {
-        message.value = `Nao foi possivel excluir o funcionario. (${error.message})`
-        messageType.value = 'error'
-        return
-    }
-
-    message.value = 'Funcionario removido com sucesso.'
+    if (!confirm('Deseja realmente remover este registro?')) return
+    if (!id) { message.value = 'Não foi possível identificar o registro.'; messageType.value = 'error'; return }
+    const { error } = await supabase.from('funcionarios').delete().eq('id_funcionario', id)
+    if (error) { message.value = `Não foi possível excluir. (${error.message})`; messageType.value = 'error'; return }
+    message.value = 'Funcionário removido com sucesso.'
     messageType.value = 'success'
     await carregar()
 }
@@ -332,254 +337,349 @@ onMounted(carregarDepartamentos)
 </script>
 
 <style scoped>
-.cadastro-page {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    background:
-        radial-gradient(circle at 6% 12%, rgba(26, 83, 92, 0.16), transparent 35%),
-        radial-gradient(circle at 96% 92%, rgba(43, 138, 200, 0.16), transparent 33%),
-        linear-gradient(155deg, #edf4f9 0%, #f3f8fc 52%, #eaf2f8 100%);
+@import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css');
+
+* {
+    box-sizing: border-box;
 }
 
-.form-panel {
-    width: 100%;
-    height: 100%;
+.layout-shell {
+    width: 92%;
+    max-width: 62rem;
+    margin: 2rem auto 3rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
+    gap: 1.25rem;
+    font-family: 'Inter', system-ui, sans-serif;
 }
 
-.form-card {
-    width: 76%;
-    height: auto;
-    min-height: 24rem;
-    border-radius: 1rem;
-    border: 0.0625rem solid rgba(18, 55, 82, 0.1);
-    background: rgba(255, 255, 255, 0.88);
-    box-shadow: 0 1.25rem 2.25rem rgba(18, 55, 82, 0.12);
-    backdrop-filter: blur(0.5rem);
-    -webkit-backdrop-filter: blur(0.5rem);
-    padding: 2rem;
+/* ── Hero ── */
+.hero-card {
+    padding: 1.75rem;
+    border-radius: 1.5rem;
+    background: linear-gradient(135deg, #0d2f47 0%, #1a5a8a 100%);
+    box-shadow: 0 20px 48px rgba(10, 30, 55, 0.22);
+    color: #fff;
+}
+
+.hero-top {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .eyebrow {
-    margin: 0;
-    font-size: 0.8rem;
-    letter-spacing: 0.08rem;
     text-transform: uppercase;
-    color: #0b6b7d;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 0.5rem;
+}
+
+.hero-card h1 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 0.5rem;
+    color: #fff;
 }
 
-h2 {
+.hero-text {
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.93rem;
+    line-height: 1.6;
     margin: 0;
-    color: #123752;
-    font-size: 2rem;
+    max-width: 36rem;
 }
 
-.subtitle {
-    margin: 0;
-    color: #466179;
-    line-height: 1.45;
+.hero-metrics {
+    display: flex;
+    gap: 0.8rem;
+    flex-shrink: 0;
 }
 
-.auth-form {
+.metric-card {
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    min-width: 9rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.2rem;
+}
+
+.metric-card.accent {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.metric-icon {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.1rem;
+}
+
+.metric-label {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.58);
+    line-height: 1.3;
+}
+
+.metric-card strong {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+}
+
+/* ── Content grid ── */
+.content-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* ── Cards ── */
+.card-form,
+.card-table {
+    border-radius: 1.25rem;
+    border: 1px solid rgba(18, 55, 82, 0.09);
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(10, 30, 55, 0.07);
+    overflow: hidden;
+}
+
+/* ── Section header ── */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(18, 55, 82, 0.07);
+    background: #fafbfc;
+}
+
+.section-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-icon {
+    font-size: 1.25rem;
+    color: #1a6fa8;
+    flex-shrink: 0;
+}
+
+.card-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #1a6fa8;
+    margin: 0 0 0.15rem;
+}
+
+.section-header h3 {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: #0f2a3f;
+    margin: 0;
+}
+
+.badge-editing {
+    font-size: 0.73rem;
+    font-weight: 700;
+    color: #a86d00;
+    background: #fff4d6;
+    border: 1px solid #f0d080;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+}
+
+.table-count {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1a6fa8;
+    background: rgba(26, 111, 168, 0.1);
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+}
+
+/* ── Form ── */
+.main-form {
+    padding: 1.25rem;
 }
 
 .form-row {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
-.form-row:has(.input-func:only-child) {
-    grid-template-columns: 1fr;
-}
-
-.input-func {
+.form-group {
+    flex: 1 1 16rem;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    color: #173e59;
-    font-size: 0.9rem;
+}
+
+.span-2 {
+    flex: 1 1 100%;
+}
+
+label {
+    font-size: 0.73rem;
     font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #4a647b;
+    text-transform: uppercase;
+}
+
+.label-optional {
+    text-transform: none;
+    font-weight: 500;
+    color: #8aa0b1;
+    font-size: 0.7rem;
+    letter-spacing: 0;
 }
 
 .input-field {
     width: 100%;
-    height: 2.8rem;
-    border-radius: 0.78rem;
-    border: 0.0625rem solid #c5dbe8;
-    background: #fcfeff;
-    padding: 0.65rem 0.75rem;
-    color: #123752;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #dce8f0;
+    border-radius: 0.75rem;
+    background: #fff;
+    color: #0f2a3f;
+    font-family: inherit;
+    font-size: 0.92rem;
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.18s, box-shadow 0.18s;
+    appearance: auto;
+    height: 2.85rem;
 }
 
-.password-field {
+.input-field:focus {
+    border-color: #1a6fa8;
+    box-shadow: 0 0 0 3px rgba(26, 111, 168, 0.12);
+}
+
+.input-field::placeholder {
+    color: #9ab0c0;
+}
+
+/* ── Password ── */
+.password-wrap {
     position: relative;
-    width: 100%;
 }
 
-.password-field .input-field {
+.password-wrap .input-field {
     padding-right: 2.8rem;
 }
 
-.password-toggle {
+.btn-toggle-pass {
     position: absolute;
     right: 0.7rem;
     top: 50%;
     transform: translateY(-50%);
-    width: 2rem;
-    height: 2rem;
     border: none;
     background: transparent;
-    color: #5f6775;
+    color: #6b8599;
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-
-.password-toggle i {
     font-size: 1rem;
+    padding: 0.25rem;
+    transition: color 0.15s;
 }
 
-.password-toggle:hover {
-    color: #123752;
+.btn-toggle-pass:hover {
+    color: #0f2a3f;
 }
 
-select.input-field {
-    background: #fcfeff;
-}
-
-.input-field:focus {
-    border-color: #2b8ac8;
-    box-shadow: 0 0 0 0.2rem rgba(43, 138, 200, 0.14);
-}
-
-.actions-row {
+/* ── Feedback ── */
+.form-feedback {
     display: flex;
-    gap: 0.65rem;
-    flex-wrap: wrap;
-}
-
-.label-btn,
-.ghost-btn {
-    height: 2.7rem;
-    border-radius: 0.9rem;
-    padding: 0 1.1rem;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 700;
-}
-
-.label-btn {
-    flex: 1;
-    width: 70%;
-    background: linear-gradient(135deg, #1A535C 0%, #2b8ac8 100%);
-    color: #f5fbff;
-}
-
-.label-btn:disabled {
-    opacity: 0.75;
-    cursor: not-allowed;
-}
-
-.ghost-btn {
-    width: 28%;
-    background: #eef5fb;
-    color: #123752;
-    border: 0.0625rem solid #c9dbe8;
-}
-
-.status-message {
-    margin: 0;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem 1rem;
     border-radius: 0.75rem;
-    padding: 0.7rem 0.8rem;
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.88rem;
+    font-weight: 600;
 }
 
-.status-message.success {
-    background: rgba(39, 174, 96, 0.12);
-    color: #1c7a46;
-    border: 0.0625rem solid rgba(39, 174, 96, 0.35);
+.form-feedback.error {
+    background: #fff1f0;
+    color: #9a2a2a;
+    border: 1px solid #f5c6c6;
 }
 
-.status-message.error {
-    background: rgba(194, 66, 66, 0.12);
-    color: #a52c2c;
-    border: 0.0625rem solid rgba(194, 66, 66, 0.35);
+.form-feedback.success {
+    background: #f0faf4;
+    color: #1a6e3f;
+    border: 1px solid #c2e8cf;
 }
 
-.helper-note {
-    margin: 0;
-    color: #3f5f78;
-    font-size: 0.85rem;
-}
-
-.table-card {
-    width: 76%;
-    height: auto;
-    border-radius: 1rem;
-    border: 0.0625rem solid rgba(18, 55, 82, 0.1);
-    background: rgba(255, 255, 255, 0.88);
-    box-shadow: 0 1.25rem 2.25rem rgba(18, 55, 82, 0.12);
-    overflow: hidden;
-}
-
-.table-header {
-    width: 100%;
-    height: 3.2rem;
+/* ── Action bar ── */
+.action-bar {
     display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.btn {
+    display: inline-flex;
     align-items: center;
-    padding: 0 1.2rem;
-    background: #f2f7fb;
-    border-bottom: 0.0625rem solid #d7e4ee;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    border: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: transform 0.15s, filter 0.15s;
 }
 
-.table-header h3 {
-    margin: 0;
-    color: #123752;
-    font-size: 1rem;
+.btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
 }
 
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #0d3a5e, #1a6fa8);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(13, 58, 94, 0.28);
+    flex: 1;
+}
+
+.btn-outline {
+    background: #f0f6fb;
+    color: #2e5a7a;
+    border: 1.5px solid #ccdde8;
+}
+
+/* ── Table ── */
 .table-wrap {
-    width: 100%;
     overflow-x: auto;
-    overflow-y: visible;
-    max-height: none;
-}
-
-/* Ensure stacked layout and full-width on small screens */
-@media (max-width: 760px) {
-    .form-card,
-    .table-card {
-        width: 96%;
-        min-height: auto;
-    }
-
-    .table-wrap {
-        max-height: none;
-    }
 }
 
 .styled-table {
@@ -588,94 +688,272 @@ select.input-field {
 }
 
 .styled-table th {
+    padding: 0.8rem 1rem;
     text-align: left;
-    font-size: 0.75rem;
-    color: #5b758c;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #6d8394;
     text-transform: uppercase;
-    letter-spacing: 0.05rem;
-    padding: 0.9rem 1.2rem;
-    background: #f8fbfd;
+    border-bottom: 1px solid #e8eef4;
+    white-space: nowrap;
+    background: #fafbfc;
 }
 
 .styled-table td {
-    padding: 0.95rem 1.2rem;
-    border-top: 0.0625rem solid #ecf2f7;
-    font-size: 0.9rem;
-    color: #35566f;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid #f0f5f9;
+    font-size: 0.88rem;
+    color: #2e4a60;
+    vertical-align: middle;
+}
+
+.styled-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.styled-table tbody tr:hover td {
+    background: rgba(26, 111, 168, 0.03);
+}
+
+/* ── Colaborador cell ── */
+.colaborador-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.avatar-img {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #dce8f0;
+    flex-shrink: 0;
+    cursor: zoom-in;
+    transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+}
+
+.avatar-img:hover {
+    transform: scale(1.12);
+    border-color: #1a6fa8;
+    box-shadow: 0 4px 14px rgba(26, 111, 168, 0.28);
+}
+
+.avatar-initials {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a6fa8, #0d3a5e);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .text-bold {
     font-weight: 700;
-    color: #183f5c;
+    color: #0f2a3f;
 }
 
-.badge {
+.text-muted {
+    color: #7a95a8;
+}
+
+/* ── Cargo cell ── */
+.cargo-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.badge-depto {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 0.28rem 0.62rem;
-    border-radius: 99rem;
-    background: #def3ea;
-    color: #1b7c51;
+    padding: 0.22rem 0.6rem;
+    border-radius: 999px;
+    background: #e0f4ec;
+    color: #1a6e45;
     font-size: 0.72rem;
     font-weight: 700;
-    margin-right: 0.45rem;
+    width: fit-content;
 }
 
 .cargo-text {
-    color: #5b758c;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
+    color: #6b8599;
 }
 
-.btn-action {
+/* ── Row actions ── */
+.row-actions {
+    display: inline-flex;
+    gap: 0.4rem;
+    justify-content: center;
+}
+
+.btn-icon {
     border: none;
     background: transparent;
-    font-size: 0.82rem;
-    font-weight: 700;
     cursor: pointer;
-}
-
-.btn-action.edit {
-    color: #2b8ac8;
-    margin-right: 0.65rem;
-}
-
-.btn-action.delete {
-    color: #b53a3a;
-}
-
-.text-center {
-    display: flex;
-    text-align: center;
-}
-
-.empty-row {
-    text-align: center;
-    color: #5b758c;
-}
-
-.colaborador-cell {
-    display: flex;
+    padding: 0.35rem 0.45rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    transition: background 0.15s, color 0.15s;
 }
 
-.avatar {
-    width: 3.2rem;
-    height: 3.2rem;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-    border: 2px solid #d7e4ee;
-    flex-shrink: 0;
+.btn-icon.edit { color: #1a6fa8; }
+.btn-icon.edit:hover { background: #e8f3fb; color: #0d3a5e; }
+.btn-icon.delete { color: #b54040; }
+.btn-icon.delete:hover { background: #fff0f0; color: #8a1f1f; }
+
+/* ── Empty state ── */
+.empty-state {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: #8aa0b1;
+    font-size: 0.9rem;
 }
 
-.avatar.placeholder {
+.empty-icon {
+    font-size: 2rem;
+    opacity: 0.4;
+}
+
+.text-center { text-align: center; }
+
+/* ── Lightbox ── */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(8, 20, 40, 0.72);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #e8f3fb, #d7e9f5);
-    color: #4a7fa8;
-    font-size: 1rem;
+    padding: 1.5rem;
+}
+
+.lightbox-box {
+    position: relative;
+    background: #fff;
+    border-radius: 1.25rem;
+    box-shadow: 0 32px 80px rgba(8, 20, 40, 0.4);
+    overflow: hidden;
+    max-width: 28rem;
+    width: 100%;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 1;
+    border: none;
+    background: rgba(15, 42, 63, 0.65);
+    color: #fff;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.15s;
+}
+
+.lightbox-close:hover {
+    background: rgba(15, 42, 63, 0.9);
+}
+
+.lightbox-img {
+    width: 100%;
+    max-height: 22rem;
+    object-fit: cover;
+    display: block;
+}
+
+.lightbox-info {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid #f0f5f9;
+}
+
+.lightbox-avatar-initials {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a6fa8, #0d3a5e);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.lightbox-nome {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #0f2a3f;
+    margin: 0 0 0.15rem;
+}
+
+.lightbox-cargo {
+    font-size: 0.8rem;
+    color: #7a95a8;
+    margin: 0;
+}
+
+/* ── Lightbox transition ── */
+.lightbox-enter-active,
+.lightbox-leave-active {
+    transition: opacity 0.22s ease;
+}
+
+.lightbox-enter-active .lightbox-box,
+.lightbox-leave-active .lightbox-box {
+    transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.lightbox-enter-from,
+.lightbox-leave-to {
+    opacity: 0;
+}
+
+.lightbox-enter-from .lightbox-box,
+.lightbox-leave-to .lightbox-box {
+    transform: scale(0.92);
+    opacity: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 760px) {
+    .layout-shell {
+        width: 96%;
+        margin: 1rem auto 2rem;
+    }
+
+    .hero-top { flex-direction: column; }
+    .hero-metrics { flex-direction: row; width: 100%; }
+    .metric-card { flex: 1; }
+    .form-row { flex-direction: column; }
+    .form-group { flex: 1 1 100%; }
+
+    .action-bar { flex-direction: column; }
+    .btn-primary, .btn-outline { width: 100%; justify-content: center; }
 }
 </style>

@@ -3,12 +3,18 @@
         <AppHeader />
     </div>
     <div class="home-container">
-        <div class="banner-wrap">
+        <section id="inicio" class="banner-wrap">
             <img class="banner" src="../../public/Image/bannerWebsite.png" alt="Banner do Website">
             <div class="banner-text">
-                <h2>Gestão em nuvem, segurança em tempo real</h2>
+                <div class="banner-content">
+                    <p class="banner-eyebrow">Gestão em nuvem para operações que não podem parar</p>
+                    <h2>Gestão em nuvem, segurança em tempo real</h2>
+                    <p class="banner-lead">
+                        Centralize o controle de EPIs, acompanhe entregas e leve mais clareza para a rotina da sua equipe.
+                    </p>
+                </div>
             </div>
-        </div>
+        </section>
         <div class="colored-text">
             <div class="carousel-track">
                 <p class="carousel-text">Segurança elevada à nuvem</p>
@@ -35,10 +41,6 @@
                     Proteção Individual da sua empresa. Nosso Sistema de Controle de EPIs foi desenvolvido para
                     facilitar o registro, acompanhamento e gerenciamento de todos os equipamentos fornecidos aos
                     colaboradores.</p>
-                <div class="buttons">
-                    <button class="sobre-button">Saber mais</button>
-                    <button class="sobre-button">Entre em contato</button>
-                </div>
             </div>
         </div>
         <div class="section-epis">
@@ -54,30 +56,29 @@
             <img class="section-image" src="../../public/Image/capacete.png" alt="Capacete de segurança">
         </div>
 
-        <section class="benefits-section">
+        <section id="sobre" class="benefits-section">
             <div class="benefits-header">
-                <h2 class="benefits-title">Por que escolher a EPICloud</h2>
-                <p class="benefits-subtitle">Beneficios exclusivos para empresas que querem evoluir a gestao de EPIs.
-                </p>
+                <h2 class="benefits-title">Por que escolher a EPICloud?</h2>
+                <p class="benefits-subtitle">Beneficios exclusivos para empresas que querem evoluir a gestao de EPIs.</p>
             </div>
 
             <div class="benefits-grid">
                 <article class="benefit-card">
                     <div class="benefit-icon"><i class="pi pi-box"></i></div>
-                    <h3>Agregacao de Valor</h3>
-                    <p>Destaque sua operacao com rastreabilidade inteligente e dados acionaveis.</p>
+                    <h3>Agregação de Valor</h3>
+                    <p>Destaque sua operação com rastreabilidade inteligente e dados acionáveis.</p>
                 </article>
 
                 <article class="benefit-card">
                     <div class="benefit-icon"><i class="pi pi-bolt"></i></div>
-                    <h3>Implementacao Rapida</h3>
-                    <p>Fluxo de implantacao simples, sem travar a rotina da sua equipe.</p>
+                    <h3>Implementação Rápida</h3>
+                    <p>Fluxo de implantação simples, sem travar a rotina da sua equipe.</p>
                 </article>
 
                 <article class="benefit-card">
                     <div class="benefit-icon"><i class="pi pi-chart-line"></i></div>
                     <h3>Escala com Controle</h3>
-                    <p>Ganhe visibilidade para crescer sem perder padrao operacional.</p>
+                    <p>Ganhe visibilidade para crescer sem perder padrão operacional.</p>
                 </article>
 
                 <article class="benefit-card">
@@ -85,6 +86,22 @@
                     <h3>Suporte Dedicado</h3>
                     <p>Conte com acompanhamento proximo para cada etapa da sua jornada.</p>
                 </article>
+
+                <article class="benefit-card">
+                    <div class="benefit-icon"><i class="pi pi-chart-bar"></i></div>
+                    <h3>Análise de Desempenho</h3>
+                    <p>Obtenha insights valiosos sobre a eficácia de sua gestão de EPIs.</p>
+                </article>
+
+                <article class="benefit-card">
+                    <div class="benefit-icon"><i class="pi pi-check"></i></div>
+                    <h3>Conformidade Regulatória</h3>
+                    <p>Garanta o cumprimento das normas e regulamentações vigentes.</p>
+                </article>
+            </div>
+
+            <div class="gradient" aria-hidden="true">
+                
             </div>
         </section>
     </div>
@@ -105,7 +122,11 @@ import AppFooter from '/components/AppFooter.vue'
     justify-content: center;
     width: 100%;
     height: auto;
-    background-color: #ffffff;
+    padding-top: 4.5rem;
+    background:
+        radial-gradient(circle at top left, rgba(78, 205, 196, 0.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(26, 83, 92, 0.1), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #f6fbfd 52%, #eef7fb 100%);
 }
 
 .banner-wrap {
@@ -114,7 +135,7 @@ import AppFooter from '/components/AppFooter.vue'
     align-items: center;
     position: relative;
     width: 100%;
-    min-height: 19rem;
+    min-height: 28rem;
     overflow: hidden;
 }
 
@@ -129,7 +150,7 @@ import AppFooter from '/components/AppFooter.vue'
 
 .banner {
     width: 100%;
-    min-height: 19rem;
+    min-height: 28rem;
     max-height: 35rem;
     object-fit: cover;
     display: block;
@@ -150,21 +171,54 @@ import AppFooter from '/components/AppFooter.vue'
     text-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
+.banner-content {
+    width: min(100%, 54rem);
+    padding: 1.6rem 1.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 1.6rem;
+    background: linear-gradient(180deg, rgba(8, 19, 30, 0.58), rgba(8, 19, 30, 0.34));
+    box-shadow: 0 20px 50px rgba(10, 25, 39, 0.28);
+    backdrop-filter: blur(0.28rem);
+    -webkit-backdrop-filter: blur(0.28rem);
+}
+
+.banner-eyebrow {
+    margin: 0 0 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #9ee7df;
+}
+
 .banner-text h2 {
     font-size: clamp(1.35rem, 2.6vw, 2.4rem);
     line-height: 1.1;
     max-width: 22ch;
+    margin: 0 auto;
+}
+
+.banner-lead {
+    margin: 0.9rem auto 0;
+    max-width: 42rem;
+    color: #edf7fb;
+    font-size: 0.98rem;
+    line-height: 1.6;
 }
 
 .sobre-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 1.4rem;
-    width: 10rem;
-    height: 3rem;
+    min-width: 10rem;
+    min-height: 3rem;
     border-radius: 0.85rem;
     background: linear-gradient(135deg, #1A535C 0%, #0f3d47 100%);
     border: none;
     color: #f4f7f6;
     box-shadow: 0px 4px 12px rgba(26, 53, 92, 0.22);
+    text-decoration: none;
     cursor: pointer;
     transition: background 0.3s ease, box-shadow 0.3s ease;
     font-weight: 700;
@@ -341,6 +395,8 @@ import AppFooter from '/components/AppFooter.vue'
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .benefits-header {
@@ -374,22 +430,42 @@ import AppFooter from '/components/AppFooter.vue'
     align-items: stretch;
     gap: 1.2rem;
     width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.gradient {
+    position: absolute;
+    left: 50%;
+    bottom: -2rem;
+    transform: translateX(-50%);
+    width: min(54rem, 88vw);
+    height: 18rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at center,
+            rgba(55, 117, 112, 0.55) 0%,
+            rgba(14, 99, 93, 0.28) 24%,
+            rgba(78, 205, 196, 0.12) 44%,
+            rgba(78, 205, 196, 0) 72%);
+    filter: blur(22px);
+    opacity: 0.95;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .benefit-card {
-    flex: 1 1 16rem;
-    max-width: 18rem;
-    background: #ffffff;
-    border: 2px solid #cfdbe5;
+    padding: 2rem;
+    width: 20rem;
+    height: 15rem;
+    border: 1px solid rgba(155, 184, 204, 0.7);
     border-radius: 1rem;
-    min-height: 16rem;
-    padding: 1.3rem 1.15rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.85rem;
     text-align: center;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 253, 0.94));
     transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.35s ease;
 }
 
@@ -506,7 +582,7 @@ import AppFooter from '/components/AppFooter.vue'
 
     .banner-wrap,
     .banner {
-        min-height: 16.5rem;
+        min-height: 20rem;
     }
 
     .banner-text {
@@ -523,9 +599,17 @@ import AppFooter from '/components/AppFooter.vue'
         max-width: 16ch;
     }
 
+    .banner-content {
+        padding: 1.2rem 1rem;
+    }
+
+    .banner-lead {
+        font-size: 0.9rem;
+    }
+
     .sobre-button {
-        width: 8.8rem;
-        height: 2.6rem;
+        min-width: 8.8rem;
+        min-height: 2.6rem;
         font-size: 0.82rem;
         margin-top: 0.9rem;
     }
@@ -604,6 +688,13 @@ import AppFooter from '/components/AppFooter.vue'
         animation-duration: 24s;
     }
 
+    .gradient {
+        width: min(42rem, 92vw);
+        height: 14rem;
+        bottom: -1.5rem;
+        filter: blur(18px);
+    }
+
     .benefit-card {
         min-height: 14rem;
     }
@@ -618,7 +709,7 @@ import AppFooter from '/components/AppFooter.vue'
 
     .banner-wrap,
     .banner {
-        min-height: 14rem;
+        min-height: 18rem;
     }
 
     .banner-text {
@@ -645,8 +736,8 @@ import AppFooter from '/components/AppFooter.vue'
     }
 
     .sobre-button {
-        width: 8.2rem;
-        height: 2.4rem;
+        min-width: 8.2rem;
+        min-height: 2.4rem;
         font-size: 0.78rem;
     }
 
@@ -679,6 +770,13 @@ import AppFooter from '/components/AppFooter.vue'
         min-width: 7.5rem;
         font-size: 0.78rem;
         padding: 0.5rem 0.7rem;
+    }
+
+    .gradient {
+        width: 94vw;
+        height: 12rem;
+        bottom: -1rem;
+        filter: blur(16px);
     }
 }
 </style>

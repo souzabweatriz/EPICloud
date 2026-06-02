@@ -1,37 +1,38 @@
 <template>
-    <div class="sidebar">
+    <div class="sidebar-wrapper">
         <aside class="sidebar">
-            <h1 class="logo-img">
-            <img src="../public/Image/logo.png" alt="logo do site" class="logo-img">
-            </h1>
+            <div class="logo-wrap">
+                <img src="../public/Image/logo.png" alt="logo do site" class="logo-img">
+            </div>
+
             <nav class="menu">
                 <RouterLink to="/dashboard/funcionario" class="menu-item" active-class="active">
-                    <i class="fas fa-users"></i>
-                    <span>Funcionários</span>
+                    <span class="item-icon"><i class="ti ti-users"></i></span>
+                    <span class="item-label">Funcionários</span>
                 </RouterLink>
                 <RouterLink to="/dashboard/entregas" class="menu-item" active-class="active">
-                    <i class="fas fa-box"></i>
-                    <span>Entregas de EPI</span>
+                    <span class="item-icon"><i class="ti ti-package"></i></span>
+                    <span class="item-label">Entregas de EPI</span>
                 </RouterLink>
                 <RouterLink to="/dashboard/estoque" class="menu-item" active-class="active">
-                    <i class="fas fa-warehouse"></i>
-                    <span>Estoque</span>
+                    <span class="item-icon"><i class="ti ti-building-warehouse"></i></span>
+                    <span class="item-label">Estoque</span>
                 </RouterLink>
                 <RouterLink to="/dashboard/relatorio" class="menu-item" active-class="active">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>Relatório</span>
+                    <span class="item-icon"><i class="ti ti-chart-bar"></i></span>
+                    <span class="item-label">Relatório</span>
                 </RouterLink>
                 <RouterLink to="/dashboard/cadastro" class="menu-item" active-class="active">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Cadastro de EPI</span>
+                    <span class="item-icon"><i class="ti ti-shield-check"></i></span>
+                    <span class="item-label">Cadastro de EPI</span>
                 </RouterLink>
             </nav>
+
             <button @click="sair" class="botao-sair">
-                <i class="fas fa-sign-out-alt"></i>
+                <i class="ti ti-logout"></i>
                 <span>Sair</span>
             </button>
         </aside>
-
     </div>
 </template>
 
@@ -54,191 +55,217 @@ async function sair() {
 </script>
 
 <style scoped>
+@import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css');
+
+* {
+    box-sizing: border-box;
+}
+
+.sidebar-wrapper {
+    width: 16rem;
+    min-height: 100vh;
+    flex-shrink: 0;
+}
+
 .sidebar {
-    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    background: #fff;
+    border-right: 1px solid #e8eef4;
+    box-shadow: 2px 0 16px rgba(18, 55, 82, 0.06);
+    z-index: 100;
+}
+
+/* ── Logo ── */
+.logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #f0f4f8;
 }
 
 .logo-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 1rem 0;
-    margin: 0;
-}
-
-.logo-img img {
+    height: 4rem;
     width: auto;
-    height: 6rem;
     object-fit: contain;
 }
 
-.sidebar>.sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 18rem;
-    min-height: 100vh;
-    padding: 1.5rem 1.25rem;
-    border-radius: 0;
-    border: 1px solid rgba(18, 55, 82, 0.08);
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(243, 248, 252, 0.92) 100%);
-    box-shadow: 0 18px 40px rgba(18, 55, 82, 0.12);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-radius: 0;
-    max-width: 19rem;
-    min-height: 100vh;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
+/* ── Nav ── */
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.25rem;
     flex: 1;
+    margin-top: 0.5rem;
 }
 
 .menu-item {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 0.85rem;
-    padding: 0.95rem 1rem;
-    border-radius: 1rem;
+    gap: 0.75rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.75rem;
     text-decoration: none;
-    color: var(--text-soft);
-    font-weight: 700;
-    font-size: 0.95rem;
-    line-height: 1;
-    background: transparent;
-    transition:
-        background-color 0.22s ease,
-        color 0.22s ease,
-        transform 0.22s ease,
-        box-shadow 0.22s ease;
+    color: #7a95a8;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: color 0.18s, background 0.18s;
 }
 
-.menu-item i {
-    width: 1.2rem;
-    text-align: center;
+.item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 0.5rem;
     font-size: 1rem;
+    flex-shrink: 0;
+    transition: background 0.18s, color 0.18s;
+}
+
+.item-label {
+    flex: 1;
+    white-space: nowrap;
 }
 
 .menu-item:hover {
-    color: var(--text-main);
-    background: rgba(43, 138, 200, 0.08);
-    transform: translateX(0.18rem);
+    color: #1a6fa8;
+    background: #f0f7fd;
+}
+
+.menu-item:hover .item-icon {
+    color: #1a6fa8;
 }
 
 .menu-item.active,
 .menu-item.router-link-active {
-    color: #fff;
-    background: linear-gradient(135deg, #123752, #2b8ac8);
-    box-shadow: 0 12px 24px rgba(18, 55, 82, 0.18);
+    color: #1a6fa8;
+    background: #e8f3fb;
+    font-weight: 700;
 }
 
+.menu-item.active .item-icon,
+.menu-item.router-link-active .item-icon {
+    background: rgba(26, 111, 168, 0.12);
+    color: #1a6fa8;
+}
+
+/* Active left bar */
+.menu-item.active::before,
+.menu-item.router-link-active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 60%;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: #1a6fa8;
+}
+
+/* ── Botão sair ── */
 .botao-sair {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 0.65rem;
     width: 100%;
-    margin-top: auto;
-    padding: 0.95rem 1rem;
-    border: 1px solid rgba(18, 55, 82, 0.12);
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.72);
-    color: #a63b3b;
-    font-weight: 800;
-    font-size: 0.95rem;
+    margin-top: 1rem;
+    padding: 0.78rem 1rem;
+    border: 1px solid #f0d0d0;
+    border-radius: 0.75rem;
+    background: #fff8f8;
+    color: #c0504040;
+    color: #b54040;
+    font-weight: 700;
+    font-size: 0.88rem;
     cursor: pointer;
-    transition:
-        transform 0.22s ease,
-        background-color 0.22s ease,
-        box-shadow 0.22s ease,
-        color 0.22s ease;
-}
-
-.botao-sair:hover {
-    background: rgba(166, 59, 59, 0.08);
-    color: #8e2f2f;
-    transform: translateY(-1px);
-    box-shadow: 0 10px 20px rgba(18, 55, 82, 0.1);
+    transition: background 0.18s, color 0.18s, border-color 0.18s;
 }
 
 .botao-sair i {
-    font-size: 0.98rem;
+    font-size: 1rem;
 }
 
+.botao-sair:hover {
+    background: #fff0f0;
+    color: #8a1f1f;
+    border-color: #f0b0b0;
+}
+
+/* ── Responsive ── */
 @media (max-width: 900px) {
-    .sidebar>.sidebar {
-        width: 100%;
-        min-height: 100vh;
-        padding: 1rem 0.8rem;
+    .sidebar-wrapper {
+        width: 14rem;
+    }
+    .sidebar {
+        width: 14rem;
     }
 }
 
 @media (max-width: 640px) {
-    .sidebar>.sidebar {
-        border-radius: 1rem;
-        padding: 0.8rem 0.45rem;
-        gap: 0.8rem;
+    .sidebar-wrapper {
+        width: 4.5rem;
+    }
+
+    .sidebar {
+        width: 4.5rem;
+        padding: 1.25rem 0.6rem;
         align-items: center;
-        min-height: auto;
     }
 
-    .logo {
-        justify-content: center;
-        font-size: 0;
-        margin-bottom: 0;
+    .logo-wrap {
+        padding-bottom: 1rem;
     }
 
-    .logo i {
-        width: 2.1rem;
-        height: 2.1rem;
-        border-radius: 0.7rem;
-        margin: 0;
+    .logo-img {
+        height: 2.2rem;
     }
 
     .menu {
-        width: 100%;
         align-items: center;
+        width: 100%;
     }
 
     .menu-item {
-        width: 2.8rem;
-        height: 2.8rem;
+        width: 3rem;
+        height: 3rem;
         justify-content: center;
         padding: 0;
         border-radius: 0.75rem;
         gap: 0;
     }
 
-    .menu-item span {
+    .item-label {
         display: none;
     }
 
-    .menu-item i {
-        width: auto;
-        font-size: 1.05rem;
+    .item-icon {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+
+    .menu-item.active::before,
+    .menu-item.router-link-active::before {
+        top: 0;
+        height: 100%;
     }
 
     .botao-sair {
-        width: 2.8rem;
-        height: 2.8rem;
+        width: 3rem;
+        height: 3rem;
         padding: 0;
         border-radius: 0.75rem;
-        font-size: 0;
-        justify-content: center;
     }
 
     .botao-sair span {
@@ -246,7 +273,7 @@ async function sair() {
     }
 
     .botao-sair i {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 }
 </style>
