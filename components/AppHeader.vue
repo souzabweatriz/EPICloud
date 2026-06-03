@@ -31,7 +31,7 @@ const router = useRouter()
 .header{
     position: fixed;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     gap: 1rem;
     padding: 0 1.5rem;
