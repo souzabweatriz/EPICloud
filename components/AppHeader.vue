@@ -8,8 +8,8 @@
     </div>
     <nav class="nav">
         <router-link class="nav-link" to="/">Início</router-link>
-        <router-link class="nav-link" to="/contato">Contato</router-link>
-        <router-link class="nav-link" to="/sobre">Sobre</router-link>
+        <router-link class="nav-link" :to="{ path: '/', hash: '#contato' }">Contato</router-link>
+        <router-link class="nav-link" :to="{ path: '/', hash: '#sobre' }">Sobre</router-link>
     </nav>
     <button class="login-button" @click="router.push('/Login')">Entrar</button>
 </header>

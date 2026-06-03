@@ -1,5 +1,5 @@
 <template>
-    <footer v-if="showFooter" class="app-footer">
+    <footer v-if="showFooter" id="contato" class="app-footer">
         <div class="footer-shell">
             <div class="footer-top">
                 <section class="brand-column">
@@ -71,6 +71,7 @@ const showFooter = computed(() => {
     min-height: 14rem;
     color: #ecf2f6;
     background: linear-gradient(135deg, #162330 0%, #223443 52%, #2a4850 100%);
+    scroll-margin-top: 5.5rem;
 }
 
 .footer-shell {

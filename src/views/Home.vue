@@ -1,113 +1,163 @@
 <template>
-    <div>
-        <AppHeader />
+  <div>
+    <AppHeader />
+  </div>
+  <div class="home-container">
+
+    <!-- BANNER -->
+    <section id="inicio" class="banner-wrap">
+      <img class="banner" src="../../public/Image/bannerWebsite.png" alt="Banner do Website" />
+      <div class="banner-overlay" aria-hidden="true"></div>
+      <div class="banner-text">
+        <span class="banner-eyebrow">Gestão em nuvem para operações que não podem parar</span>
+        <h1 class="banner-title">Gestão em nuvem,<br /><em>segurança em tempo real</em></h1>
+        <p class="banner-lead">
+          Centralize o controle de EPIs, acompanhe entregas e leve mais clareza para a rotina da sua equipe.
+        </p>
+        <a href="#sobre" class="cta-btn">Conheça a EPICloud</a>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-pill">Segurança elevada à nuvem</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-pill">Gestão que protege vidas</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-pill">Decisões mais inteligentes</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-pill">Controle em tempo real</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-pill">Eficiência que cresce</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-pill">Processos mais ágeis</span>
+        <span class="marquee-dot">◆</span>
+        <!-- duplicate -->
+        <span class="marquee-pill">Segurança elevada à nuvem</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-pill">Gestão que protege vidas</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-pill">Decisões mais inteligentes</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-pill">Controle em tempo real</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-pill">Eficiência que cresce</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-pill">Processos mais ágeis</span>
+        <span class="marquee-dot">◆</span>
+      </div>
     </div>
-    <div class="home-container">
-        <section id="inicio" class="banner-wrap">
-            <img class="banner" src="../../public/Image/bannerWebsite.png" alt="Banner do Website">
-            <div class="banner-text">
-                <div class="banner-content">
-                    <p class="banner-eyebrow">Gestão em nuvem para operações que não podem parar</p>
-                    <h2>Gestão em nuvem, segurança em tempo real</h2>
-                    <p class="banner-lead">
-                        Centralize o controle de EPIs, acompanhe entregas e leve mais clareza para a rotina da sua equipe.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <div class="colored-text">
-            <div class="carousel-track">
-                <p class="carousel-text">Segurança elevada à nuvem</p>
-                <p class="carousel-text">Gestão que protege vidas</p>
-                <p class="carousel-text">Decisões mais inteligentes</p>
-                <p class="carousel-text">Controle em tempo real</p>
-                <p class="carousel-text">Eficiência que cresce</p>
-                <p class="carousel-text">Processos mais ágeis</p>
-            </div>
-            <div class="carousel-track" aria-hidden="true">
-                <p class="carousel-text">Segurança elevada à nuvem</p>
-                <p class="carousel-text">Gestão que protege vidas</p>
-                <p class="carousel-text">Decisões mais inteligentes</p>
-                <p class="carousel-text">Controle em tempo real</p>
-                <p class="carousel-text">Eficiência que cresce</p>
-                <p class="carousel-text">Processos mais ágeis</p>
-            </div>
+
+    <!-- SECTION 1 -->
+    <section class="feature-section">
+      <div class="feature-image-wrap">
+        <img src="../../public/Image/oculos.png" alt="Óculos de proteção" class="feature-img" />
+      </div>
+      <div class="feature-text">
+        <span class="section-label">Ciclo de vida completo</span>
+        <h2>Controle total dos equipamentos de proteção</h2>
+        <p>Garanta mais segurança, organização e eficiência na gestão de EPIs da sua empresa. Nosso sistema facilita o registro, acompanhamento e gerenciamento de todos os equipamentos fornecidos aos colaboradores.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="feature-section reverse">
+      <div class="feature-image-wrap">
+        <img src="../../public/Image/capacete.png" alt="Capacete de segurança" class="feature-img" />
+      </div>
+      <div class="feature-text">
+        <span class="section-label">Rastreabilidade</span>
+        <h2>Rastreabilidade completa, segurança garantida</h2>
+        <p>Acompanhe cada etapa do ciclo de vida dos EPIs, desde a aquisição até a entrega e descarte. Rastreabilidade total com precisão, proporcionando mais segurança para seus colaboradores e tranquilidade para sua empresa.</p>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section id="sobre" class="benefits-section">
+      <div class="benefits-header">
+        <span class="section-label">Diferenciais</span>
+        <h2>Por que escolher a EPICloud?</h2>
+        <p class="benefits-subtitle">Benefícios exclusivos para empresas que querem evoluir a gestão de EPIs.</p>
+      </div>
+
+      <div class="benefits-grid">
+        <article class="benefit-card">
+          <div class="benefit-icon"><i class="pi pi-box"></i></div>
+          <h3>Agregação de Valor</h3>
+          <p>Destaque sua operação com rastreabilidade inteligente e dados acionáveis.</p>
+        </article>
+        <article class="benefit-card">
+          <div class="benefit-icon"><i class="pi pi-bolt"></i></div>
+          <h3>Implementação Rápida</h3>
+          <p>Fluxo de implantação simples, sem travar a rotina da sua equipe.</p>
+        </article>
+        <article class="benefit-card">
+          <div class="benefit-icon"><i class="pi pi-chart-line"></i></div>
+          <h3>Escala com Controle</h3>
+          <p>Ganhe visibilidade para crescer sem perder padrão operacional.</p>
+        </article>
+        <article class="benefit-card">
+          <div class="benefit-icon"><i class="pi pi-users"></i></div>
+          <h3>Suporte Dedicado</h3>
+          <p>Conte com acompanhamento próximo para cada etapa da sua jornada.</p>
+        </article>
+        <article class="benefit-card">
+          <div class="benefit-icon"><i class="pi pi-chart-bar"></i></div>
+          <h3>Análise de Desempenho</h3>
+          <p>Obtenha insights valiosos sobre a eficácia de sua gestão de EPIs.</p>
+        </article>
+        <article class="benefit-card">
+          <div class="benefit-icon"><i class="pi pi-check"></i></div>
+          <h3>Conformidade Regulatória</h3>
+          <p>Garanta o cumprimento das normas e regulamentações vigentes.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section">
+      <div class="how-header">
+        <span class="section-label">Como funciona</span>
+        <h2>Do cadastro ao controle, em minutos</h2>
+        <p class="how-subtitle">Um fluxo simples e intuitivo para colocar sua equipe no controle total dos EPIs.</p>
+      </div>
+
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="step-number">01</div>
+          <div class="step-connector" aria-hidden="true"></div>
+          <div class="step-icon"><i class="pi pi-user-plus"></i></div>
+          <h3>Cadastre sua empresa</h3>
+          <p>Crie sua conta, adicione colaboradores e configure os departamentos em poucos minutos.</p>
         </div>
-        <div class="section-epis">
-            <img class="section-image" src="../../public/Image/oculos.png" alt="Logo da Empresa">
-            <div class="texts">
-                <h1 class="title-epis">Controle total do ciclo de vida dos equipamentos de proteção</h1>
-                <p class="section-text">Garanta mais segurança, organização e eficiência na gestão de Equipamentos de
-                    Proteção Individual da sua empresa. Nosso Sistema de Controle de EPIs foi desenvolvido para
-                    facilitar o registro, acompanhamento e gerenciamento de todos os equipamentos fornecidos aos
-                    colaboradores.</p>
-            </div>
+        <div class="how-step">
+          <div class="step-number">02</div>
+          <div class="step-connector" aria-hidden="true"></div>
+          <div class="step-icon"><i class="pi pi-box"></i></div>
+          <h3>Registre os EPIs</h3>
+          <p>Cadastre todos os equipamentos com validade, CA e especificações. O sistema organiza tudo automaticamente.</p>
         </div>
-        <div class="section-epis">
-            <div class="texts">
-                <h2 class="title-epis">Rastreabilidade completa, segurança garantida</h2>
-                <p class="section-text">Acompanhe cada etapa do ciclo de vida dos EPIs, desde a aquisição até a entrega
-                    e descarte. Nosso sistema oferece rastreabilidade total, garantindo que cada equipamento seja
-                    monitorado
-                    e gerenciado com precisão, proporcionando mais segurança para seus colaboradores e tranquilidade
-                    para
-                    sua empresa.</p>
-            </div>
-            <img class="section-image" src="../../public/Image/capacete.png" alt="Capacete de segurança">
+        <div class="how-step">
+          <div class="step-number">03</div>
+          <div class="step-connector" aria-hidden="true"></div>
+          <div class="step-icon"><i class="pi pi-send"></i></div>
+          <h3>Realize entregas</h3>
+          <p>Registre entregas para cada colaborador com assinatura digital e histórico completo de recebimentos.</p>
         </div>
+        <div class="how-step">
+          <div class="step-number">04</div>
+          <div class="step-connector last" aria-hidden="true"></div>
+          <div class="step-icon"><i class="pi pi-chart-bar"></i></div>
+          <h3>Monitore em tempo real</h3>
+          <p>Acompanhe vencimentos, estoques e conformidade pelo dashboard com alertas automáticos.</p>
+        </div>
+      </div>
+    </section>
 
-        <section id="sobre" class="benefits-section">
-            <div class="benefits-header">
-                <h2 class="benefits-title">Por que escolher a EPICloud?</h2>
-                <p class="benefits-subtitle">Beneficios exclusivos para empresas que querem evoluir a gestao de EPIs.</p>
-            </div>
-
-            <div class="benefits-grid">
-                <article class="benefit-card">
-                    <div class="benefit-icon"><i class="pi pi-box"></i></div>
-                    <h3>Agregação de Valor</h3>
-                    <p>Destaque sua operação com rastreabilidade inteligente e dados acionáveis.</p>
-                </article>
-
-                <article class="benefit-card">
-                    <div class="benefit-icon"><i class="pi pi-bolt"></i></div>
-                    <h3>Implementação Rápida</h3>
-                    <p>Fluxo de implantação simples, sem travar a rotina da sua equipe.</p>
-                </article>
-
-                <article class="benefit-card">
-                    <div class="benefit-icon"><i class="pi pi-chart-line"></i></div>
-                    <h3>Escala com Controle</h3>
-                    <p>Ganhe visibilidade para crescer sem perder padrão operacional.</p>
-                </article>
-
-                <article class="benefit-card">
-                    <div class="benefit-icon"><i class="pi pi-users"></i></div>
-                    <h3>Suporte Dedicado</h3>
-                    <p>Conte com acompanhamento proximo para cada etapa da sua jornada.</p>
-                </article>
-
-                <article class="benefit-card">
-                    <div class="benefit-icon"><i class="pi pi-chart-bar"></i></div>
-                    <h3>Análise de Desempenho</h3>
-                    <p>Obtenha insights valiosos sobre a eficácia de sua gestão de EPIs.</p>
-                </article>
-
-                <article class="benefit-card">
-                    <div class="benefit-icon"><i class="pi pi-check"></i></div>
-                    <h3>Conformidade Regulatória</h3>
-                    <p>Garanta o cumprimento das normas e regulamentações vigentes.</p>
-                </article>
-            </div>
-
-            <div class="gradient" aria-hidden="true">
-                
-            </div>
-        </section>
-    </div>
-    <AppFooter />
+  </div>
+  <AppFooter />
 </template>
-
 
 <script setup>
 import AppHeader from '/components/AppHeader.vue'
@@ -115,668 +165,560 @@ import AppFooter from '/components/AppFooter.vue'
 </script>
 
 <style scoped>
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --teal-dark:   #0f3d47;
+  --teal-mid:    #1A535C;
+  --teal-light:  #4ECDC4;
+  --teal-pale:   #e3f2f4;
+  --ink:         #123752;
+  --ink-soft:    #5f6775;
+  --ink-muted:   #5f6775;
+  --surface:     #f4f9fb;
+  --white:       #ffffff;
+  --radius-lg:   1.5rem;
+  --radius-md:   1rem;
+  --shadow-card: 0 8px 32px rgba(15, 61, 71, 0.10);
+  --shadow-lift: 0 18px 48px rgba(15, 61, 71, 0.18);
+}
+
+/* ── RESET / BASE ────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 .home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: auto;
-    padding-top: 4.5rem;
-    background:
-        radial-gradient(circle at top left, rgba(78, 205, 196, 0.12), transparent 24%),
-        radial-gradient(circle at top right, rgba(26, 83, 92, 0.1), transparent 28%),
-        linear-gradient(180deg, #ffffff 0%, #f6fbfd 52%, #eef7fb 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background:
+    radial-gradient(ellipse 70% 32% at 10% 0%, rgba(78,205,196,.10) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 28% at 90% 8%, rgba(26,83,92,.09) 0%, transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, #f4f9fb 60%, #eaf4f8 100%);
+  padding-top: 4.5rem; /* header clearance */
 }
 
+/* ── BANNER ──────────────────────────────────────────── */
 .banner-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    min-height: 28rem;
-    overflow: hidden;
-}
-
-.banner-wrap::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(26, 34, 44, 0.716);
-    pointer-events: none;
-    z-index: 1;
+  position: relative;
+  width: 100%;
+  min-height: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .banner {
-    width: 100%;
-    min-height: 28rem;
-    max-height: 35rem;
-    object-fit: cover;
-    display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(5,15,20,.92) 0%, rgba(10,40,50,.88) 55%, rgba(15,61,71,.82) 100%);
 }
 
 .banner-text {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1.2rem;
-    text-align: center;
-    z-index: 2;
-    color: #f4f7f6;
-    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
-}
-
-.banner-content {
-    width: min(100%, 54rem);
-    padding: 1.6rem 1.7rem;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 1.6rem;
-    background: linear-gradient(180deg, rgba(8, 19, 30, 0.58), rgba(8, 19, 30, 0.34));
-    box-shadow: 0 20px 50px rgba(10, 25, 39, 0.28);
-    backdrop-filter: blur(0.28rem);
-    -webkit-backdrop-filter: blur(0.28rem);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .75rem;
+  width: min(100%, 56rem);
+  padding: 3rem 2.5rem;
+  color: #fff;
 }
 
 .banner-eyebrow {
-    margin: 0 0 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.76rem;
-    font-weight: 700;
-    color: #9ee7df;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #9ee7df;
 }
 
-.banner-text h2 {
-    font-size: clamp(1.35rem, 2.6vw, 2.4rem);
-    line-height: 1.1;
-    max-width: 22ch;
-    margin: 0 auto;
+.banner-title {
+  font-size: clamp(1.9rem, 4.5vw, 3.4rem);
+  line-height: 1.08;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 4px 24px rgba(0,0,0,.6);
+}
+
+.banner-title em {
+  font-style: normal;
+  color: #4ECDC4;
 }
 
 .banner-lead {
-    margin: 0.9rem auto 0;
-    max-width: 42rem;
-    color: #edf7fb;
-    font-size: 0.98rem;
-    line-height: 1.6;
+  max-width: 38rem;
+  font-size: clamp(.9rem, 1.6vw, 1.05rem);
+  line-height: 1.65;
+  color: #e8f4f6;
+  margin-top: .25rem;
 }
 
-.sobre-button {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1.4rem;
-    min-width: 10rem;
-    min-height: 3rem;
-    border-radius: 0.85rem;
-    background: linear-gradient(135deg, #1A535C 0%, #0f3d47 100%);
-    border: none;
-    color: #f4f7f6;
-    box-shadow: 0px 4px 12px rgba(26, 53, 92, 0.22);
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    font-weight: 700;
-    font-size: 0.92rem;
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: .75rem;
+  padding: .8rem 1.8rem;
+  background: linear-gradient(135deg, #1A535C 0%, #0f3d47 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: .95rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1.5px solid rgba(78,205,196,.35);
+  box-shadow: 0 6px 20px rgba(15,61,71,.35);
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
 }
 
-.sobre-button:hover {
-    background: linear-gradient(135deg, #084f4a 0%, #3db5ac 100%);
-    box-shadow: 0px 6px 16px rgba(78, 205, 196, 0.28);
+.cta-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #4ECDC4 0%, #1A535C 100%);
+  box-shadow: 0 10px 30px rgba(78,205,196,.32);
 }
 
-.epis-showcase {
-    position: relative;
-    width: 100%;
-    max-width: 62rem;
-    height: 40rem;
-    margin-top: 0.4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ── MARQUEE ─────────────────────────────────────────── */
+.marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  padding: 1.2rem 0;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
 }
 
-.colored-text {
-    display: flex;
-    justify-content: center;
-    margin-top: 1.4rem;
-    align-items: center;
-    gap: 1rem;
-    overflow: hidden;
-    width: 100%;
-    padding: 0 0.6rem;
-    mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: max-content;
+  animation: marquee 28s linear infinite;
 }
 
-.carousel-track {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    min-width: max-content;
-    height: auto;
-    animation: marquee 26s linear infinite;
+.marquee-pill {
+  background: rgba(255,255,255,.85);
+  border: 1.5px solid rgba(26,83,92,.18);
+  color: #0f3d47;
+  font-size: .88rem;
+  font-weight: 600;
+  padding: .5rem 1.1rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(15,61,71,.07);
 }
 
-.carousel-text {
-    background-color: #ffffffb0;
-    border-radius: 1.2rem;
-    border: 1px solid #062a38;
-    color: #00454f;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 2.4rem;
-    min-width: 9rem;
-    padding: 0.6rem 0.9rem;
-    font-size: 0.92rem;
-    font-weight: 600;
-    line-height: 1;
-    white-space: nowrap;
-    flex-shrink: 0;
-    box-shadow: 0 10px 24px rgba(18, 55, 82, 0.08);
-}
-
-.section-text {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    gap: 0.7rem;
-    margin-top: 1.5rem;
-    width: 90%;
-    max-width: 42rem;
-    line-height: 1.65;
-    color: var(--text-soft);
-}
-
-
-.section-epis {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    width: 100%;
-    max-width: 72rem;
-    min-height: 26rem;
-    align-items: center;
-    gap: 2rem;
-    margin: 3rem 0 1.5rem;
-    padding: 2rem;
-    border-radius: 2rem;
-    border: none;
-    background: linear-gradient(135deg, rgba(243, 248, 252, 0.96) 0%, rgba(255, 255, 255, 0.98) 55%, rgba(234, 242, 248, 0.95) 100%);
-    box-shadow: 0 18px 42px rgba(18, 55, 82, 0.08);
-}
-
-.texts {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 58%;
-    height: auto;
-    gap: 0.5rem;
-}
-
-
-.title-epis {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: var(--text-main);
-    font-size: clamp(1.55rem, 2vw, 2.2rem);
-    line-height: 1.15;
-    margin: 0;
-    width: 100%;
-}
-
-.section-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 38%;
-    max-width: 24rem;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 14px 18px rgba(18, 55, 82, 0.12));
-}
-
-.buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-@media (max-width: 900px) {
-    .section-epis {
-        flex-direction: column;
-        width: 92%;
-        min-height: auto;
-        padding: 1.5rem;
-        gap: 1.25rem;
-    }
-
-    .title-epis {
-        font-size: 1.75rem;
-    }
-
-    .texts,
-    .section-image {
-        width: 100%;
-    }
-
-    .section-image {
-        max-width: 20rem;
-        height: 18rem;
-    }
-}
-
-.section-tracking {
-    margin-top: 1.4rem;
-    margin-bottom: 2.2rem;
-    padding: 0 1rem;
-    text-align: center;
-}
-
-.benefits-section {
-    width: 100%;
-    max-width: 84rem;
-    padding: 2.8rem 0.7rem 3.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.benefits-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 0.9rem;
-    margin-bottom: 1.8rem;
-}
-
-.benefits-title {
-    font-size: 2rem;
-    color: #123752;
-    line-height: 1.08;
-}
-
-.benefits-subtitle {
-    font-size: 1.15rem;
-    color: #5f6775;
-    width: 100%;
-    max-width: 46rem;
-    line-height: 1.45;
-}
-
-.benefits-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: stretch;
-    gap: 1.2rem;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-}
-
-.gradient {
-    position: absolute;
-    left: 50%;
-    bottom: -2rem;
-    transform: translateX(-50%);
-    width: min(54rem, 88vw);
-    height: 18rem;
-    border-radius: 50%;
-    background: radial-gradient(circle at center,
-            rgba(55, 117, 112, 0.55) 0%,
-            rgba(14, 99, 93, 0.28) 24%,
-            rgba(78, 205, 196, 0.12) 44%,
-            rgba(78, 205, 196, 0) 72%);
-    filter: blur(22px);
-    opacity: 0.95;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.benefit-card {
-    padding: 2rem;
-    width: 20rem;
-    height: 15rem;
-    border: 1px solid rgba(155, 184, 204, 0.7);
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.85rem;
-    text-align: center;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 253, 0.94));
-    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.35s ease;
-}
-
-.benefit-card:hover {
-    transform: translateY(-0.45rem);
-    box-shadow: 0 18px 34px rgba(18, 55, 82, 0.18);
-    border-color: #9bb8cc;
-}
-
-.benefit-icon {
-    width: 3.2rem;
-    height: 3.2rem;
-    border-radius: 0.95rem;
-    background: #e3f2f4;
-    color: #1A535C;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-}
-
-.benefit-icon i {
-    font-size: 1.2rem;
-}
-
-.benefit-card h3 {
-    color: #123752;
-    font-size: 1.35rem;
-    line-height: 1.15;
-    margin: 0;
-}
-
-.benefit-card p {
-    color: #5f6775;
-    font-size: 0.98rem;
-    line-height: 1.45;
-    margin: 0;
-}
-
-@keyframes sectionGlow {
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes titleReveal {
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-@keyframes subtitleReveal {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes gradientFlow {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+.marquee-dot {
+  color: #4ECDC4;
+  font-size: .6rem;
+  flex-shrink: 0;
 }
 
 @keyframes marquee {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-50%);
-    }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
-@media (max-width: 1024px) {
-    .home-nav {
-        height: 21rem;
-        padding: 1rem;
-    }
-
-    .home-title {
-        font-size: 2.2rem;
-        max-width: 32rem;
-    }
-
-    .text {
-        font-size: 1.02rem;
-        max-width: 30rem;
-    }
-
-    .banner-text h2 {
-        max-width: 18ch;
-    }
-
-    .carousel-text {
-        font-size: 0.82rem;
-    }
-
-    .carousel-track {
-        animation-duration: 30s;
-    }
+/* ── SECTION LABEL ───────────────────────────────────── */
+.section-label {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: #1A535C;
+  background: #e3f2f4;
+  padding: .3rem .85rem;
+  border-radius: 999px;
 }
 
-@media (max-width: 768px) {
-
-    .banner-wrap,
-    .banner {
-        min-height: 20rem;
-    }
-
-    .banner-text {
-        padding: 1rem;
-    }
-
-    .banner-eyebrow {
-        font-size: 0.78rem;
-        letter-spacing: 0.06em;
-    }
-
-    .banner-text h2 {
-        font-size: clamp(1.12rem, 5vw, 1.7rem);
-        max-width: 16ch;
-    }
-
-    .banner-content {
-        padding: 1.2rem 1rem;
-    }
-
-    .banner-lead {
-        font-size: 0.9rem;
-    }
-
-    .sobre-button {
-        min-width: 8.8rem;
-        min-height: 2.6rem;
-        font-size: 0.82rem;
-        margin-top: 0.9rem;
-    }
-
-    .colored-text {
-        margin-top: 1rem;
-        gap: 0.7rem;
-        padding: 0 0.4rem;
-    }
-
-    .carousel-text {
-        min-height: 2.2rem;
-        min-width: 8.2rem;
-        font-size: 0.86rem;
-        padding: 0.55rem 0.8rem;
-    }
-
-    .carousel-track {
-        gap: 0.7rem;
-        animation-duration: 26s;
-    }
-
-    .benefits-section {
-        padding: 2.2rem 0.7rem 2.6rem;
-    }
-
-    .benefits-subtitle {
-        font-size: 1rem;
-    }
-
-    .benefit-card h3 {
-        font-size: 1.8rem;
-    }
-
-    .benefit-card p {
-        font-size: 1.2rem;
-    }
+/* ── FEATURE SECTIONS ────────────────────────────────── */
+.feature-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  width: min(100%, 72rem);
+  padding: 4rem 2rem;
 }
 
-@media (max-width: 640px) {
-    .home-nav {
-        height: 19rem;
-        padding: 1rem;
-    }
-
-    .home-title {
-        font-size: 1.8rem;
-        text-align: center;
-    }
-
-    .text {
-        font-size: 0.97rem;
-    }
-
-    .title-epis {
-        font-size: 1.4rem;
-        text-align: center;
-    }
-
-    .section-epis {
-        padding: 1.25rem;
-        border-radius: 1.5rem;
-    }
-
-    .section-title {
-        font-size: 1.6rem;
-        text-align: center;
-    }
-
-    .colored-text {
-        gap: 0.55rem;
-        padding: 0 0.7rem;
-    }
-
-    .carousel-track {
-        animation-duration: 24s;
-    }
-
-    .gradient {
-        width: min(42rem, 92vw);
-        height: 14rem;
-        bottom: -1.5rem;
-        filter: blur(18px);
-    }
-
-    .benefit-card {
-        min-height: 14rem;
-    }
-
-    .section-tracking {
-        margin-top: 1rem;
-        margin-bottom: 1.8rem;
-    }
+.feature-section.reverse {
+  direction: rtl;
+}
+.feature-section.reverse > * {
+  direction: ltr;
 }
 
-@media (max-width: 480px) {
+.feature-image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #e3f2f4 0%, #e3f2f4 100%);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  min-height: 22rem;
+}
 
-    .banner-wrap,
-    .banner {
-        min-height: 18rem;
-    }
+.feature-img {
+  width: 100%;
+  max-width: 18rem;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 28px rgba(15,61,71,.18));
+  transition: transform .4s ease;
+}
 
-    .banner-text {
-        gap: 0.35rem;
-        padding: 0.8rem;
-    }
+.feature-img:hover {
+  transform: scale(1.03) translateY(-4px);
+}
 
-    .banner-text h2 {
-        font-size: clamp(1rem, 6vw, 1.35rem);
-        max-width: 15ch;
-    }
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-    .home-nav {
-        height: 17rem;
-    }
+.feature-text h2 {
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-weight: 800;
+  color: #123752;
+  line-height: 1.15;
+}
 
-    .home-title {
-        font-size: 1.5rem;
-    }
+.feature-text p {
+  font-size: clamp(.9rem, 1.4vw, 1rem);
+  color: #5f6775;
+  line-height: 1.7;
+  max-width: 36rem;
+}
 
-    .text {
-        font-size: 0.9rem;
-        max-width: 20rem;
-    }
+/* ── BENEFITS ────────────────────────────────────────── */
+.benefits-section {
+  width: 100%;
+  padding: 4rem 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(214,240,238,.35) 40%, transparent 100%);
+}
 
-    .sobre-button {
-        min-width: 8.2rem;
-        min-height: 2.4rem;
-        font-size: 0.78rem;
-    }
+.benefits-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  text-align: center;
+}
 
-    .section-title {
-        font-size: 1.35rem;
-    }
+.benefits-header h2 {
+  font-size: clamp(1.65rem, 3vw, 2.3rem);
+  font-weight: 800;
+  color: #123752;
+  line-height: 1.1;
+}
 
-    .section-image {
-        max-width: 16rem;
-        height: 14rem;
-    }
+.benefits-subtitle {
+  font-size: clamp(.9rem, 1.4vw, 1.05rem);
+  color: #5f6775;
+  max-width: 42rem;
+  line-height: 1.55;
+}
 
-    .section-subtitle {
-        font-size: 0.92rem;
-        padding: 0 0.5rem;
-    }
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: min(100%, 72rem);
+}
 
-    .colored-text {
-        margin-top: 0.85rem;
-        padding: 0 0.5rem;
-        mask-image: none;
-    }
+.benefit-card {
+  background: #fff;
+  border: 1.5px solid rgba(155,184,204,.55);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  box-shadow: var(--shadow-card);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .3s ease;
+}
 
-    .carousel-track {
-        animation-duration: 22s;
-    }
+.benefit-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+  border-color: #4ECDC4;
+}
 
-    .carousel-text {
-        min-height: 2.0rem;
-        min-width: 7.5rem;
-        font-size: 0.78rem;
-        padding: 0.5rem 0.7rem;
-    }
+.benefit-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: .8rem;
+  background: linear-gradient(135deg, #e3f2f4 0%, #9ee7df 100%);
+  color: #1A535C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
 
-    .gradient {
-        width: 94vw;
-        height: 12rem;
-        bottom: -1rem;
-        filter: blur(16px);
-    }
+.benefit-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #123752;
+  line-height: 1.2;
+}
+
+.benefit-card p {
+  font-size: .9rem;
+  color: #5f6775;
+  line-height: 1.55;
+}
+
+/* ── HOW IT WORKS ────────────────────────────────────── */
+.how-section {
+  width: 100%;
+  padding: 4.5rem 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  background: linear-gradient(180deg, #0f3d47 0%, #1A535C 100%);
+}
+.how-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  text-align: center;
+}
+.how-section .section-label {
+  background: rgba(78,205,196,.18);
+  color: #4ECDC4;
+  border: 1px solid rgba(78,205,196,.3);
+}
+.how-header h2 {
+  font-size: clamp(1.65rem, 3vw, 2.3rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+}
+.how-subtitle {
+  font-size: clamp(.9rem, 1.4vw, 1.05rem);
+  color: #9ee7df;
+  max-width: 42rem;
+  line-height: 1.55;
+}
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  width: min(100%, 72rem);
+  position: relative;
+}
+.how-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: .85rem;
+  position: relative;
+}
+.step-number {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  color: #4ECDC4;
+}
+.step-connector {
+  position: absolute;
+  top: 3.6rem;
+  left: 50%;
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(78,205,196,.5) 0%, rgba(78,205,196,.15) 100%);
+  z-index: 0;
+}
+.step-connector.last { display: none; }
+.step-icon {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 1rem;
+  background: rgba(78,205,196,.12);
+  border: 1.5px solid rgba(78,205,196,.35);
+  color: #4ECDC4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  position: relative;
+  z-index: 1;
+  transition: background .3s ease, transform .3s ease;
+}
+.how-step:hover .step-icon {
+  background: rgba(78,205,196,.22);
+  transform: translateY(-3px);
+}
+.how-step h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+.how-step p {
+  font-size: .88rem;
+  color: #9ee7df;
+  line-height: 1.6;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+
+/* Tablet: 2 cols benefits, stacked feature */
+@media (max-width: 900px) {
+  .feature-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .feature-section.reverse {
+    direction: ltr;
+  }
+
+  .feature-image-wrap {
+    min-height: 16rem;
+    padding: 1.8rem;
+  }
+
+  .feature-img {
+    max-width: 14rem;
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .how-steps { grid-template-columns: repeat(2, 1fr); }
+  .step-connector { display: none; }
+}
+
+/* Mobile: 1 col everything */
+@media (max-width: 600px) {
+  .home-container {
+    padding-top: 3.8rem;
+  }
+
+  .banner-wrap {
+    min-height: 22rem;
+  }
+
+  .banner-text {
+    padding: 2rem 1.25rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .banner-eyebrow {
+    font-size: .7rem;
+  }
+
+  .banner-title {
+    font-size: clamp(1.55rem, 7vw, 2rem);
+  }
+
+  .banner-lead {
+    font-size: .88rem;
+    text-align: center;
+  }
+
+  .cta-btn {
+    align-self: center;
+    font-size: .88rem;
+    padding: .7rem 1.5rem;
+  }
+
+  .marquee-wrap {
+    padding: .9rem 0;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .marquee-pill {
+    font-size: .8rem;
+    padding: .42rem .9rem;
+  }
+
+  .feature-section {
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .feature-image-wrap {
+    min-height: 13rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+  }
+
+  .feature-img {
+    max-width: 11rem;
+  }
+
+  .feature-text h2 {
+    font-size: 1.35rem;
+  }
+
+  .feature-text p {
+    font-size: .88rem;
+  }
+
+  .benefits-section {
+    padding: 3rem 1rem 3.5rem;
+    gap: 1.8rem;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .how-steps { grid-template-columns: 1fr; gap: 1.2rem; }
+
+  .benefit-card {
+    padding: 1.4rem 1.2rem;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .benefit-icon {
+    flex-shrink: 0;
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1rem;
+  }
+
+  .benefit-card h3 {
+    font-size: .97rem;
+  }
+
+  .benefit-card p {
+    font-size: .84rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .banner-title {
+    font-size: 1.4rem;
+  }
+
+  .benefits-grid {
+    gap: .8rem;
+  }
 }
 </style>
