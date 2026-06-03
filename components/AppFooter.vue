@@ -71,6 +71,7 @@ const showFooter = computed(() => {
     min-height: 14rem;
     color: #ecf2f6;
     background: linear-gradient(135deg, #162330 0%, #223443 52%, #2a4850 100%);
+    margin-top: 2.5rem;
     scroll-margin-top: 5.5rem;
 }
 
