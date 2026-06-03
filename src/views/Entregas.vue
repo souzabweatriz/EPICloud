@@ -120,11 +120,12 @@
                                 <th>Qtd.</th>
                                 <th>Data</th>
                                 <th>Status</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-if="!entregas.length">
-                                <td colspan="5" class="empty-state">
+                                <td colspan="6" class="empty-state">
                                     <i class="ti ti-inbox-off empty-icon"></i>
                                     <span>Nenhuma entrega registrada.</span>
                                 </td>
@@ -147,10 +148,15 @@
                                 <td><span class="badge-quantidade">{{ e.quantidade }}</span></td>
                                 <td class="text-muted">{{ formatarData(e.data_entrega) }}</td>
                                 <td>
-                                    <span :class="e.assinatura_digital ? 'badge-status ok' : 'badge-status warn'">
-                                        <i :class="e.assinatura_digital ? 'ti ti-circle-check' : 'ti ti-clock'"></i>
-                                        {{ e.assinatura_digital ? 'Confirmada' : 'Pendente' }}
+                                    <span :class="e.devolvido ? 'badge-status ok' : (e.assinatura_digital ? 'badge-status ok' : 'badge-status warn')">
+                                        <i :class="e.devolvido ? 'ti ti-undo-2' : (e.assinatura_digital ? 'ti ti-circle-check' : 'ti ti-clock')"></i>
+                                        {{ e.devolvido ? 'Devolvido' : (e.assinatura_digital ? 'Confirmada' : 'Pendente') }}
                                     </span>
+                                </td>
+                                <td>
+                                    <button v-if="!e.devolvido" class="btn-action" @click="abrirDevolucao(e)" title="Registrar devolução">
+                                        <i class="ti ti-arrow-back-up"></i> Devolver
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -158,6 +164,68 @@
                 </div>
             </section>
         </main>
+
+        <!-- Modal de Devolução -->
+        <div v-if="modalDevolucao" class="modal-overlay" @click.self="fecharDevolucao">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Registrar devolução</h2>
+                    <button class="btn-close" @click="fecharDevolucao" aria-label="Fechar">
+                        <i class="ti ti-x"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div v-if="entregaSelecionada" class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Funcionário</span>
+                            <span class="info-value">{{ getFuncionarioNome(entregaSelecionada.id_funcionario) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">EPI</span>
+                            <span class="info-value">{{ getEpiNome(entregaSelecionada.id_epi) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Qtd. Entregue</span>
+                            <span class="info-value">{{ entregaSelecionada.quantidade }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Data Entrega</span>
+                            <span class="info-value">{{ formatarData(entregaSelecionada.data_entrega) }}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quantidade devolvida</label>
+                        <input type="number" v-model.number="formDevolucao.quantidade_devolvida" min="1" 
+                            :max="entregaSelecionada?.quantidade" class="input-field"
+                            placeholder="Qtd. devolvida">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data de devolução</label>
+                        <input type="date" v-model="formDevolucao.data_devolucao" class="input-field">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <textarea v-model="formDevolucao.observacoes" class="input-field textarea"
+                            placeholder="Ex: Danificado, fora de validade, etc."></textarea>
+                    </div>
+
+                    <p v-if="erroModal" class="form-feedback error">
+                        <i class="ti ti-alert-circle"></i> {{ erroModal }}
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" @click="fecharDevolucao">Cancelar</button>
+                    <button class="btn btn-primary" @click="registrarDevolucao" :disabled="loadingModal">
+                        <i class="ti ti-undo-2"></i> Confirmar devolução
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -177,8 +245,15 @@ const loading = ref(true)
 const erro = ref('')
 const ok = ref(false)
 
+// Modal de devolução
+const modalDevolucao = ref(false)
+const entregaSelecionada = ref(null)
+const loadingModal = ref(false)
+const erroModal = ref('')
+
 const hoje = new Date().toISOString().slice(0, 10)
 const form = ref({ id_funcionario: '', id_epi: '', quantidade: 1, data_entrega: hoje, assinatura_digital: false })
+const formDevolucao = ref({ quantidade_devolvida: 1, data_devolucao: hoje, observacoes: '' })
 
 const funcionariosUnicos = computed(() => new Set(entregas.value.map(e => e.id_funcionario)).size)
 
@@ -219,7 +294,8 @@ async function registrar() {
         id_epi: form.value.id_epi,
         quantidade: form.value.quantidade,
         data_entrega: form.value.data_entrega,
-        observacoes: form.value.assinatura_digital ? 'Assinatura digital confirmada' : null
+        observacoes: form.value.assinatura_digital ? 'Assinatura digital confirmada' : null,
+        devolvido: false
     }
 
     const { error } = await supabase.from('entregas').insert(payload).select()
@@ -235,6 +311,85 @@ async function registrar() {
     ok.value = true
     form.value = { id_funcionario: '', id_epi: '', quantidade: 1, data_entrega: hoje, assinatura_digital: false }
     await carregar()
+}
+
+function abrirDevolucao(entrega) {
+    entregaSelecionada.value = entrega
+    formDevolucao.value = { 
+        quantidade_devolvida: entrega.quantidade, 
+        data_devolucao: hoje, 
+        observacoes: '' 
+    }
+    erroModal.value = ''
+    modalDevolucao.value = true
+}
+
+function fecharDevolucao() {
+    modalDevolucao.value = false
+    entregaSelecionada.value = null
+    formDevolucao.value = { quantidade_devolvida: 1, data_devolucao: hoje, observacoes: '' }
+    erroModal.value = ''
+}
+
+async function registrarDevolucao() {
+    erroModal.value = ''
+    loadingModal.value = true
+
+    if (!formDevolucao.value.quantidade_devolvida || formDevolucao.value.quantidade_devolvida <= 0) {
+        erroModal.value = 'Informe a quantidade devolvida'
+        loadingModal.value = false
+        return
+    }
+
+    if (formDevolucao.value.quantidade_devolvida > entregaSelecionada.value.quantidade) {
+        erroModal.value = `Quantidade devolvida não pode ser maior que ${entregaSelecionada.value.quantidade}`
+        loadingModal.value = false
+        return
+    }
+
+    try {
+        // Registrar devolução
+        const payloadDevolucao = {
+            id_entrega: entregaSelecionada.value.id_entrega || entregaSelecionada.value.id,
+            quantidade_devolvida: formDevolucao.value.quantidade_devolvida,
+            data_devolucao: formDevolucao.value.data_devolucao,
+            observacoes: formDevolucao.value.observacoes,
+            data_criacao: new Date().toISOString()
+        }
+
+        const { error: erroDevolucao } = await supabase.from('devolucoes').insert(payloadDevolucao)
+        if (erroDevolucao) throw erroDevolucao
+
+        // Atualizar status de devolução na entrega
+        const quantidadeRestante = entregaSelecionada.value.quantidade - formDevolucao.value.quantidade_devolvida
+        const novoDevolvido = quantidadeRestante === 0
+
+        const { error: erroUpdate } = await supabase
+            .from('entregas')
+            .update({ devolvido: novoDevolvido })
+            .eq('id_entrega', entregaSelecionada.value.id_entrega || entregaSelecionada.value.id)
+
+        if (erroUpdate) throw erroUpdate
+
+        // Restaurar estoque
+        const epiKey = entregaSelecionada.value.id_epi
+        const qtdEstoque = estoqueMap.value[epiKey] ?? estoqueMap.value[String(epiKey)] ?? 0
+        const novoEstoque = qtdEstoque + formDevolucao.value.quantidade_devolvida
+
+        const stockCheck = await supabase.from('estoque').select('*').limit(1)
+        if (stockCheck.data && stockCheck.data.length) {
+            await supabase.from('estoque').update({ quantidade: novoEstoque }).eq('epi_id', epiKey)
+        } else {
+            await supabase.from('epi').update({ estoque: novoEstoque }).eq('id_epi', epiKey)
+        }
+
+        fecharDevolucao()
+        await carregar()
+    } catch (e) {
+        erroModal.value = e.message || String(e)
+    } finally {
+        loadingModal.value = false
+    }
 }
 
 const iniciais = (nome) => (nome || '').split(' ').slice(0, 2).map(p => p[0]).join('').toUpperCase()
@@ -463,6 +618,12 @@ label {
     color: #9ab0c0;
 }
 
+.textarea {
+    resize: vertical;
+    min-height: 5rem;
+    height: auto;
+}
+
 /* ── Checkbox ── */
 .checkbox-group {
     justify-content: flex-end;
@@ -581,6 +742,11 @@ label {
     box-shadow: 0 8px 20px rgba(13, 58, 94, 0.28);
 }
 
+.btn-secondary {
+    background: #e8eef4;
+    color: #1a6fa8;
+}
+
 /* ── Table ── */
 .table-wrap {
     overflow-x: auto;
@@ -687,6 +853,27 @@ label {
     color: #8a6200;
 }
 
+/* ── Action Button ── */
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.6rem;
+    border: 1px solid #1a6fa8;
+    background: #f0f8ff;
+    color: #1a6fa8;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-action:hover {
+    background: #e8f4ff;
+    border-color: #0d3a5e;
+}
+
 /* ── States ── */
 .loading-state {
     display: flex;
@@ -725,6 +912,127 @@ label {
     opacity: 0.4;
 }
 
+/* ── Modal ── */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 1.25rem;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    max-width: 32rem;
+    width: 90%;
+    animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e8eef4;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f2a3f;
+}
+
+.btn-close {
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    background: transparent;
+    color: #7a95a8;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-close:hover {
+    background: #f0f5f9;
+    color: #0f2a3f;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #fafbfc;
+    border-radius: 0.8rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.info-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #6d8394;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0f2a3f;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    border-top: 1px solid #e8eef4;
+    justify-content: flex-end;
+}
+
 /* ── Responsive ── */
 @media (max-width: 760px) {
     .layout-shell {
@@ -755,6 +1063,23 @@ label {
 
     .checkbox-group {
         justify-content: flex-start;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-width: 100%;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-footer {
+        flex-direction: column-reverse;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
     }
 }
 </style>
